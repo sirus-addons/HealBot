@@ -1,6 +1,6 @@
 ## Interface: 30300
 ## Title: Titan Panel [|cffeda55fHealBot|r] 3.3.5.2
-## Notes: |@Version: 2@|Adds a small icon and options for Healbot.
+## Notes: |@Version: 3@|Adds a small icon and options for Healbot.
 ## Author: Strife
 ## RequiredDeps: Titan
 ## RequiredDeps: HealBot

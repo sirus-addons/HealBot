@@ -264,6 +264,7 @@ local HealBot_Racial_Debuff_Spells = {
   ["Eredar"] = {},
   ["Lightforged"] = {},
   ["ZandalariTroll"] = {},
+  ["Dracthyr"] = {},
 }
 
 local HealBot_Debuff_Types = {
