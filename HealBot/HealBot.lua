@@ -2066,6 +2066,13 @@ function HealBot_configClassHoT(class, race)
     else
         HealBot_Watch_HoT[HEALBOT_BARKSKIN]=nil
     end
+    if hbClassHoTwatch[HEALBOT_INNERVATE]==3 then
+        HealBot_Watch_HoT[HEALBOT_INNERVATE]="A"
+    elseif hbClassHoTwatch[HEALBOT_INNERVATE]==2 and class==HealBot_Class_En[HEALBOT_DRUID] then
+        HealBot_Watch_HoT[HEALBOT_INNERVATE]="C"
+    else
+        HealBot_Watch_HoT[HEALBOT_INNERVATE]=nil
+    end
     if hbClassHoTwatch[HEALBOT_SURVIVAL_INSTINCTS]==3 then
         HealBot_Watch_HoT[HEALBOT_SURVIVAL_INSTINCTS]="A"
     elseif hbClassHoTwatch[HEALBOT_SURVIVAL_INSTINCTS]==2 and class==HealBot_Class_En[HEALBOT_DRUID] then
