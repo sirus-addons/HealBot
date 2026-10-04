@@ -60,7 +60,6 @@ HealBot_ConfigDefaults = {
   SmartCastRes = 1,
   RangeCheckFreq=0.4,
   DisableHealBot=0,
-  HealBot_ButtonRadius=78,
   HealBot_ButtonPosition=300,
   ButtonShown=1,
   ttalpha=0.8,

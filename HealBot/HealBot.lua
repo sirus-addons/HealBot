@@ -5477,12 +5477,14 @@ function HealBot_HasTalent(tab,icon,talentName)
 end
 
 function HealBot_MMButton_UpdatePosition()
+    local radius = Minimap:GetWidth() / 2 + 10
+    HealBot_ButtonFrame:ClearAllPoints();
     HealBot_ButtonFrame:SetPoint(
-        "TOPLEFT",
+        "CENTER",
         "Minimap",
-        "TOPLEFT",
-        54 - (HealBot_Config.HealBot_ButtonRadius * cos(HealBot_Config.HealBot_ButtonPosition)),
-        (HealBot_Config.HealBot_ButtonRadius * sin(HealBot_Config.HealBot_ButtonPosition)) - 55
+        "CENTER",
+        -(radius * cos(HealBot_Config.HealBot_ButtonPosition)),
+        radius * sin(HealBot_Config.HealBot_ButtonPosition)
     );
 end
 
@@ -5519,9 +5521,9 @@ end
 
 function HealBot_MMButton_BeingDragged()
     w,x = GetCursorPosition() 
-    y,z = Minimap:GetLeft(), Minimap:GetBottom() 
-    w = y-w/UIParent:GetScale()+70 
-    x = x/UIParent:GetScale()-z-70 
+    y,z = Minimap:GetCenter() 
+    w = y-w/Minimap:GetEffectiveScale() 
+    x = x/Minimap:GetEffectiveScale()-z 
     HealBot_MMButton_SetPosition(math.deg(math.atan2(x,w)));
 end
 
