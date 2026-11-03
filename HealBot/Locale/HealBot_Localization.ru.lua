@@ -235,6 +235,8 @@ HEALBOT_BONE_SHIELD				= GetSpellInfo(49222);
 HEALBOT_HORN_OF_WINTER			= GetSpellInfo(57330);
 HEALBOT_HYSTERIA                = GetSpellInfo(49016);
 HEALBOT_INNERVATE               = GetSpellInfo(29166);
+HEALBOT_HAND_OF_GOD             = GetSpellInfo(304704) or "Божья длань";
+HEALBOT_GODS_GRACE              = GetSpellInfo(319166) or "Божья милость";
 
 HEALBOT_A_MONKEY           = GetSpellInfo(13163) or "Дух обезьяны";
 HEALBOT_A_HAWK             = GetSpellInfo(13165) or "Дух ястреба";

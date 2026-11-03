@@ -239,6 +239,8 @@ HEALBOT_BONE_SHIELD                     = GetSpellInfo(49222) or "Bone Shield";
 HEALBOT_HORN_OF_WINTER                  = GetSpellInfo(57330) or "Horn of Winter";
 HEALBOT_HYSTERIA                        = GetSpellInfo(49016) or "Hysteria";
 HEALBOT_INNERVATE                       = GetSpellInfo(29166) or "Innervate";
+HEALBOT_HAND_OF_GOD                     = GetSpellInfo(304704) or "Hand of God";
+HEALBOT_GODS_GRACE                      = GetSpellInfo(319166) or "God's Grace";
 
 HEALBOT_A_MONKEY                        = GetSpellInfo(13163) or "Aspect of the Monkey"
 HEALBOT_A_HAWK                          = GetSpellInfo(13165) or "Aspect of the Hawk"

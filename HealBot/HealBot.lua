@@ -2122,6 +2122,20 @@ function HealBot_configClassHoT(class, race)
     else
         HealBot_Watch_HoT[HEALBOT_SACRED_CLEANSING]=nil
     end
+    if hbClassHoTwatch[HEALBOT_HAND_OF_GOD]==3 then
+        HealBot_Watch_HoT[HEALBOT_HAND_OF_GOD]="A"
+    elseif hbClassHoTwatch[HEALBOT_HAND_OF_GOD]==2 and class==HealBot_Class_En[HEALBOT_PALADIN] then
+        HealBot_Watch_HoT[HEALBOT_HAND_OF_GOD]="C"
+    else
+        HealBot_Watch_HoT[HEALBOT_HAND_OF_GOD]=nil
+    end
+    if hbClassHoTwatch[HEALBOT_GODS_GRACE]==3 then
+        HealBot_Watch_HoT[HEALBOT_GODS_GRACE]="A"
+    elseif hbClassHoTwatch[HEALBOT_GODS_GRACE]==2 and class==HealBot_Class_En[HEALBOT_PALADIN] then
+        HealBot_Watch_HoT[HEALBOT_GODS_GRACE]="C"
+    else
+        HealBot_Watch_HoT[HEALBOT_GODS_GRACE]=nil
+    end
     if hbClassHoTwatch[HEALBOT_LIGHT_BEACON]==3 then
         HealBot_Watch_HoT[HEALBOT_LIGHT_BEACON]="A"
     elseif hbClassHoTwatch[HEALBOT_LIGHT_BEACON]==2 and class==HealBot_Class_En[HEALBOT_PALADIN] then
@@ -3310,9 +3324,9 @@ function HealBot_HasMyBuffs(hbGUID)
         HoTActive=nil
         while true do
             bName,_,iTexture,bCount,_,_,expirationTime, caster,_,_,spellID = UnitAura(xUnit, k, "HELPFUL"); 
-            if bName and caster then
+            if bName then
                 y=HealBot_Watch_HoT[bName] or "nil"
-                if (y=="A" or (y=="C" and caster=="player")) and not hbExcludeSpells[spellID] then
+                if caster and (y=="A" or (y=="C" and caster=="player")) and not hbExcludeSpells[spellID] then
                     hbHoTcaster=UnitGUID(caster).."!" 
                     if bName==HEALBOT_INNER_FOCUS or bName==HEALBOT_NATURE_SWIFTNESS or (expirationTime or 0)==0 then expirationTime=hbNoEndTime end
                     if not HealBot_Player_HoT[hbGUID] then HealBot_Player_HoT[hbGUID]={} end
@@ -3402,8 +3416,8 @@ function HealBot_CheckMyBuffs(hbGUID)
     xUnit=HealBot_UnitID[hbGUID]
     if not xUnit then return end
     for bName,_ in pairs(HealBot_CheckBuffs) do
-        _,_,_,_,_,_,z,caster,_ = HealBot_HasUnitBuff(xUnit,bName,"player")
-        if z and caster and caster=="player" then
+        _,z = HealBot_HasUnitBuff(bName,xUnit,"player")
+        if z and z-GetTime()>0 then
             HealBot_SetUnitBuffTimer(hbGUID,bName,z)
         elseif HealBot_PlayerBuff[hbGUID] and HealBot_PlayerBuff[hbGUID][bName] then
             if HealBot_PlayerBuff[hbGUID][bName]==HealBot_CheckBuffsTime then
@@ -5201,7 +5215,7 @@ function HealBot_HoT_UpdateIcon(button, index, secLeft, Texture, hotID, hbGUID)
         hbiconcount2:SetText(" ");
     else
         xGUID, sName=string.split("!", hotID or "H!B")
-        if (Healbot_Config_Skins.ShowIconTextCountSelfCast==1 and xGUID~=HealBot_PlayerGUID) or Healbot_Config_Skins.ShowIconTextCount[Healbot_Config_Skins.Current_Skin]==0 then
+        if (Healbot_Config_Skins.ShowIconTextCountSelfCast[Healbot_Config_Skins.Current_Skin]==1 and xGUID~=HealBot_PlayerGUID) or Healbot_Config_Skins.ShowIconTextCount[Healbot_Config_Skins.Current_Skin]==0 then
             iconTxt=nil
         else
             if HealBot_HoT_Count[hotID] and HealBot_HoT_Count[hotID][hbGUID] then
@@ -5227,7 +5241,7 @@ function HealBot_HoT_UpdateIcon(button, index, secLeft, Texture, hotID, hbGUID)
             hbiconcount2:SetText(" ");
             hbiconcount2:SetTextColor(1,1,1,0);
         end
-        if (Healbot_Config_Skins.ShowIconTextDurationSelfCast==1 and xGUID~=HealBot_PlayerGUID) or Healbot_Config_Skins.ShowIconTextDuration[Healbot_Config_Skins.Current_Skin]==0 then
+        if (Healbot_Config_Skins.ShowIconTextDurationSelfCast[Healbot_Config_Skins.Current_Skin]==1 and xGUID~=HealBot_PlayerGUID) or Healbot_Config_Skins.ShowIconTextDuration[Healbot_Config_Skins.Current_Skin]==0 then
             iconTxt=nil
         else
             iconTxt=secLeft
@@ -5463,12 +5477,14 @@ function HealBot_HasTalent(tab,icon,talentName)
 end
 
 function HealBot_MMButton_UpdatePosition()
+    local radius = Minimap:GetWidth() / 2 + 10
+    HealBot_ButtonFrame:ClearAllPoints();
     HealBot_ButtonFrame:SetPoint(
-        "TOPLEFT",
+        "CENTER",
         "Minimap",
-        "TOPLEFT",
-        54 - (HealBot_Config.HealBot_ButtonRadius * cos(HealBot_Config.HealBot_ButtonPosition)),
-        (HealBot_Config.HealBot_ButtonRadius * sin(HealBot_Config.HealBot_ButtonPosition)) - 55
+        "CENTER",
+        -(radius * cos(HealBot_Config.HealBot_ButtonPosition)),
+        radius * sin(HealBot_Config.HealBot_ButtonPosition)
     );
 end
 
@@ -5505,9 +5521,9 @@ end
 
 function HealBot_MMButton_BeingDragged()
     w,x = GetCursorPosition() 
-    y,z = Minimap:GetLeft(), Minimap:GetBottom() 
-    w = y-w/UIParent:GetScale()+70 
-    x = x/UIParent:GetScale()-z-70 
+    y,z = Minimap:GetCenter() 
+    w = y-w/Minimap:GetEffectiveScale() 
+    x = x/Minimap:GetEffectiveScale()-z 
     HealBot_MMButton_SetPosition(math.deg(math.atan2(x,w)));
 end
 
@@ -5552,6 +5568,29 @@ function HealBot_SmartCast(hbGUID,hlthDelta)
     return w;
 end
 
+local HealBot_PeacemakerCacheTime, HealBot_PeacemakerCache = 0, false
+function HealBot_PlayerHasPeacemaker()
+    local now = GetTime()
+    if (now - HealBot_PeacemakerCacheTime) < 1 then
+        return HealBot_PeacemakerCache
+    end
+    HealBot_PeacemakerCacheTime = now
+    HealBot_PeacemakerCache = false
+    for i = 1, 40 do
+        local name, _, texture, _, _, _, _, _, _, _, spellId = UnitBuff("player", i)
+        if not name then break end
+        if spellId == 150605 or (type(texture) == "string" and string.find(string.lower(texture), "racial_innerpeace", 1, true)) then
+            HealBot_PeacemakerCache = true
+            break
+        end
+    end
+    return HealBot_PeacemakerCache
+end
+
+function HealBot_PeacemakerGroupHeal(unit)
+    return unit and HealBot_PlayerHasPeacemaker() and UnitInRange(unit) == 1 and (UnitInParty(unit) or UnitInRaid(unit) or UnitIsUnit(unit, "player"))
+end
+
 local uRange=0
 function HealBot_UnitInRange(spellName, unit) -- added by Diacono of Ursin
     if UnitGUID(unit)==HealBot_PlayerGUID then
@@ -5564,6 +5603,9 @@ function HealBot_UnitInRange(spellName, unit) -- added by Diacono of Ursin
         end
     elseif IsSpellInRange(spellName, unit) ~= nil then
         uRange = IsSpellInRange(spellName, unit)
+        if uRange ~= 1 and HealBot_PeacemakerGroupHeal(unit) then
+            uRange = 1
+        end
     elseif IsItemInRange(spellName, unit) ~= nil then
         uRange = IsItemInRange(spellName, unit)
     elseif UnitInRange(unit) == 1 then

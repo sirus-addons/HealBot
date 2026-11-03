@@ -754,7 +754,7 @@ function HealBot_Action_EnableButton(button, hbGUID)
         ebuProcessThis=true
         ebufastenable=false
         if HealBot_Config.ProtectPvP==1 then
-            if UnitIsPVP(ebUnit) and not UnitIsPVP("player") then 
+            if UnitIsPVP(ebUnit) and not UnitIsPVP("player") and not HealBot_PeacemakerGroupHeal(ebUnit) then 
                 ebuProcessThis=false
             end
         end
@@ -2096,6 +2096,8 @@ function HealBot_Action_SetButtonAttrib(button,bbutton,bkey,status,j)
                     button:SetAttribute(HB_prefix.."type"..j,"macro")
                     button:SetAttribute(HB_prefix.."macrotext"..j, mText)
                 else
+                    button:SetAttribute(HB_prefix.."type"..j, "spell");
+                    button:SetAttribute(HB_prefix.."spell"..j, sName);
                     button:SetAttribute(HB_prefix.."helpbutton"..j, "heal"..j);
                     button:SetAttribute(HB_prefix.."type-heal"..j, "spell");
                     button:SetAttribute(HB_prefix.."spell-heal"..j, sName);
@@ -2119,6 +2121,8 @@ function HealBot_Action_SetButtonAttrib(button,bbutton,bkey,status,j)
                         HealBotButtonMacroAttribs[HB_prefix..j]=sName
                     end
                 else
+                    button:SetAttribute(HB_prefix.."type"..j, "item");
+                    button:SetAttribute(HB_prefix.."item"..j, sName);
                     button:SetAttribute(HB_prefix.."helpbutton"..j, "item"..j);
                     button:SetAttribute(HB_prefix.."type-item"..j, "item");
                     button:SetAttribute(HB_prefix.."item-item"..j, sName);
@@ -2127,6 +2131,8 @@ function HealBot_Action_SetButtonAttrib(button,bbutton,bkey,status,j)
         end
     else
         button:SetAttribute(HB_prefix.."helpbutton"..j, nil);
+        button:SetAttribute(HB_prefix.."type"..j, nil);
+        button:SetAttribute(HB_prefix.."spell"..j, nil);
     end
 end
 
@@ -2971,7 +2977,7 @@ function HealBot_Action_PreClick(self,button)
                 return
             end
             if HealBot_Config.ProtectPvP==1 then
-                if UnitIsPVP(self.unit) and not UnitIsPVP("player") then 
+                if UnitIsPVP(self.unit) and not UnitIsPVP("player") and not HealBot_PeacemakerGroupHeal(self.unit) then 
                     HealBot_Action_SetButtonAttrib(self,abutton,ModKey,"nil",aj)
                     usedSmartCast=true;
                 end
@@ -3002,6 +3008,8 @@ function HealBot_Action_UseSmartCast(bp,hbGUID)
         sID=HealBot_GetSpellId(sName)
         if sID then
             if HealBot_UnitInRange(sName, bp.unit)==1 or hbGUID==HealBot_PlayerGUID then
+                bp:SetAttribute("type1", "spell");
+                bp:SetAttribute("spell1", sName);
                 bp:SetAttribute("helpbutton1", "heal1");
                 bp:SetAttribute("type-heal1", "spell");
                 bp:SetAttribute("spell-heal1", sName);

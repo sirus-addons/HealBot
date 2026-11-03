@@ -311,7 +311,7 @@ function HealBot_Action_RefreshTooltip(unit, state)
                 end
             end
             if d then linenum=linenum+1 end
-            if HealBot_Config.ProtectPvP==1 and UnitIsPVP(unit) and not UnitIsPVP("player") then 
+            if HealBot_Config.ProtectPvP==1 and UnitIsPVP(unit) and not UnitIsPVP("player") and not HealBot_PeacemakerGroupHeal(unit) then 
                 HealBot_Tooltip_SetLineLeft("    ----- PVP -----",1,0.5,0.5,linenum,1);
                 HealBot_Tooltip_SetLineRight("----- PVP -----    ",1,0.5,0.5,linenum,1);
                 linenum=linenum+1;
