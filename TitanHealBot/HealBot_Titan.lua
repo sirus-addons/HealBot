@@ -226,7 +226,7 @@ function TitanPanelRightClickMenu_PrepareHealBotMenu()
         TitanPanelRightClickMenu_AddSpacer()	
         TitanPanelRightClickMenu_AddTitle("Version "..x)
         TitanPanelRightClickMenu_AddTitle("is available at")
-        TitanPanelRightClickMenu_AddTitle("healbot.alturl.com")
+        TitanPanelRightClickMenu_AddTitle("github.com/sirus-addons/HealBot")
     end
     
   elseif UIDROPDOWNMENU_MENU_LEVEL == 2 then

@@ -1,4 +1,4 @@
-HEALBOT_VERSION = "3.3.5.4";
+HEALBOT_VERSION = "3.3.5.7";
 HealBotSkinVersion = 17;
 
 -------------
@@ -19,6 +19,7 @@ HEALBOT_SHAMAN                          = "Shaman";
 HEALBOT_WARLOCK                         = "Warlock";
 HEALBOT_WARRIOR                         = "Warrior";
 HEALBOT_DEATHKNIGHT                     = "Death Knight";
+HEALBOT_NEW_ITEMS                       = "Items";
 
 HEALBOT_SILK_BANDAGE                    = GetItemInfo(6450) or "Silk Bandage";
 HEALBOT_HEAVY_SILK_BANDAGE              = GetItemInfo(6451) or "Heavy Silk Bandage";
@@ -241,6 +242,21 @@ HEALBOT_HYSTERIA                        = GetSpellInfo(49016) or "Hysteria";
 HEALBOT_INNERVATE                       = GetSpellInfo(29166) or "Innervate";
 HEALBOT_HAND_OF_GOD                     = GetSpellInfo(304704) or "Hand of God";
 HEALBOT_GODS_GRACE                      = GetSpellInfo(319166) or "God's Grace";
+HEALBOT_HAND_OF_THE_GUARDIANS           = GetSpellInfo(313104) or "Hand of the Guardians";
+HEALBOT_TOUCH_OF_THE_TITANS             = GetSpellInfo(313106) or "Touch of the Titans";
+HEALBOT_ACCESSORY_HEALING               = GetSpellInfo(311060) or "Accessory Healing";
+HEALBOT_COVER_OF_LIGHT                  = GetSpellInfo(319738) or "Cover of Light";
+HEALBOT_RESIDUAL_SHINE                  = GetSpellInfo(319540) or "Residual Shine";
+HEALBOT_THE_GIFT_OF_ISERA               = GetSpellInfo(308090) or "The Gift of Isera";
+HEALBOT_FLOWERING_PERIOD                = GetSpellInfo(308093) or "Flowering Period";
+HEALBOT_BLOSSOMING                      = GetSpellInfo(308094) or "Blossoming";
+HEALBOT_RENEWAL                         = GetSpellInfo(305081) or "Renewal";
+HEALBOT_AURA_MASTER                     = GetSpellInfo(31821) or "Aura Mastery";
+HEALBOT_DIVINE_GUARDIAN                 = GetSpellInfo(70940) or "Divine Guardian";
+HEALBOT_SACRED_SACRIFICE                = GetSpellInfo(64205) or "Sacred Sacrifice";
+HEALBOT_HEALING_RAIN                    = GetSpellInfo(308017) or "Healing Rain";
+HEALBOT_PRIMEVAL_MOISTURE               = GetSpellInfo(308015) or "Primeval Moisture";
+HEALBOT_ICE_BLOCK                       = GetSpellInfo(45438) or "Ice Block";
 
 HEALBOT_A_MONKEY                        = GetSpellInfo(13163) or "Aspect of the Monkey"
 HEALBOT_A_HAWK                          = GetSpellInfo(13165) or "Aspect of the Hawk"
@@ -580,6 +596,7 @@ HEALBOT_TOOLTIP_ACTUALBONUS             = "Actual bonus is";
 HEALBOT_TOOLTIP_SHIELD                  = "Ward";
 HEALBOT_TOOLTIP_LOCATION                = "Location";
 HEALBOT_TOOLTIP_CORPSE                  = "Corpse of ";
+HEALBOT_SUFFERS_FROM                    = " suffers from ";
 HEALBOT_WORDS_OVER                      = "over";
 HEALBOT_WORDS_SEC                       = "sec";
 HEALBOT_WORDS_TO                        = "to";
@@ -700,6 +717,7 @@ HEALBOT_OPTION_CPUPROFILE               = "Use CPU profiler (Addons CPU usage In
 HEALBOT_OPTIONS_RELOADUIMSG             = "This option requires a UI Reload, Reload now?"
 
 HEALBOT_SELF_PVP                        = "Self PvP"
+HEALBOT_PVP_TEXT                        = "PVP"
 HEALBOT_OPTIONS_ANCHOR                  = "Frame anchor"
 HEALBOT_OPTIONS_BARSANCHOR              = "Bars anchor"
 HEALBOT_OPTIONS_TOPLEFT                 = "Top Left"
@@ -818,6 +836,8 @@ HEALBOT_OPTION_NUMPETS                  = "Number of Pets"
 HEALBOT_WORD_TEST                       = "Test";
 HEALBOT_WORD_OFF                        = "Off";
 HEALBOT_WORD_ON                         = "On";
+HEALBOT_WORD_MANA                       = "Mana";
+HEALBOT_WORD_REQUIRES                   = "Requires";
 
 HEALBOT_OPTIONS_TAB_INCHEALS            = "Inc. Heals"
 HEALBOT_OPTIONS_TAB_CHAT                = "Chat"
@@ -880,7 +900,7 @@ HEALBOT_OPTIONS_BUTTONSHARESKIN         = "Share with"
 
 HEALBOT_CHAT_ADDONID                    = "[HealBot]  "
 HEALBOT_CHAT_NEWVERSION1                = "A newer version is available"
-HEALBOT_CHAT_NEWVERSION2                = "at http://healbot.alturl.com"
+HEALBOT_CHAT_NEWVERSION2                = "at https://github.com/sirus-addons/HealBot"
 HEALBOT_CHAT_SHARESKINERR1              = " Skin not found for Sharing"
 HEALBOT_CHAT_SHARESKINERR2              = "'s HealBot version is too old for Skin Sharing"
 HEALBOT_CHAT_SHARESKINERR3              = " not found for Skin Sharing"

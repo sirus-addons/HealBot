@@ -764,7 +764,7 @@ HEALBOT_OPTIONS_BUTTONSHARESKIN     = "Partager avec"
 
 HEALBOT_CHAT_ADDONID                = "[HealBot]  "
 HEALBOT_CHAT_NEWVERSION1            = "Une version plus r\195\169cente est disponible"
-HEALBOT_CHAT_NEWVERSION2            = "sur http://healbot.alturl.com"
+HEALBOT_CHAT_NEWVERSION2            = "sur https://github.com/sirus-addons/HealBot"
 HEALBOT_CHAT_SHARESKINERR1          = " Skin pas trouv\195\169e pour le partage"
 HEALBOT_CHAT_SHARESKINERR2          = " cette version de HealBot ne permet pas le partage de skins"
 HEALBOT_CHAT_SHARESKINERR3          = " pas trouv\195\169e pour le partage de skin"

@@ -5,7 +5,7 @@
 ## SavedVariablesPerCharacter:  HealBot_Config
 ## SavedVariables: Healbot_Config_Skins, HealBot_Globals
 ## OptionalDeps: LibSharedMedia-3.0, LibHealComm-4.0, LibQuickHealth-2.0, LibTalentQuery-1.0
-## Version: 3.3.5.4
+## Version: 3.3.5.7
 
 embeds.xml
 

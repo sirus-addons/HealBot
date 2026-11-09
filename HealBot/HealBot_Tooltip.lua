@@ -134,11 +134,11 @@ function HealBot_Action_RefreshTooltip(unit, state)
     spellButton5 = HealBot_Action_SpellPattern("Button5", state);
     linenum = 1
     
-    if spellLeft and strsub(strlower(spellLeft),1,4)==strlower(HEALBOT_TELL) then spellLeft=HEALBOT_TELL end
-    if spellMiddle and strsub(strlower(spellMiddle),1,4)==strlower(HEALBOT_TELL) then spellMiddle=HEALBOT_TELL end
-    if spellRight and strsub(strlower(spellRight),1,4)==strlower(HEALBOT_TELL) then spellRight=HEALBOT_TELL end
-    if spellButton4 and strsub(strlower(spellButton4),1,4)==strlower(HEALBOT_TELL) then spellButton4=HEALBOT_TELL end
-    if spellButton5 and strsub(strlower(spellButton5),1,4)==strlower(HEALBOT_TELL) then spellButton5=HEALBOT_TELL end
+    if spellLeft and strsub(strlower(spellLeft),1,strlen(HEALBOT_TELL))==strlower(HEALBOT_TELL) then spellLeft=HEALBOT_TELL end
+    if spellMiddle and strsub(strlower(spellMiddle),1,strlen(HEALBOT_TELL))==strlower(HEALBOT_TELL) then spellMiddle=HEALBOT_TELL end
+    if spellRight and strsub(strlower(spellRight),1,strlen(HEALBOT_TELL))==strlower(HEALBOT_TELL) then spellRight=HEALBOT_TELL end
+    if spellButton4 and strsub(strlower(spellButton4),1,strlen(HEALBOT_TELL))==strlower(HEALBOT_TELL) then spellButton4=HEALBOT_TELL end
+    if spellButton5 and strsub(strlower(spellButton5),1,strlen(HEALBOT_TELL))==strlower(HEALBOT_TELL) then spellButton5=HEALBOT_TELL end
 
     spellLeftShow = spellLeft
     spellMiddleShow = spellMiddle
@@ -155,35 +155,35 @@ function HealBot_Action_RefreshTooltip(unit, state)
     if  spellLeft and strlower(spellLeft)~=strlower(HEALBOT_DISABLED_TARGET) and strlower(spellLeft)~=strlower(HEALBOT_ASSIST) 
     and strlower(spellLeft)~=strlower(HEALBOT_FOCUS) and strlower(spellLeft)~=strlower(HEALBOT_MENU) and strlower(spellLeft)~=strlower(HEALBOT_HBMENU) 
     and strlower(spellLeft)~=strlower(HEALBOT_MAINTANK) and strlower(spellLeft)~=strlower(HEALBOT_MAINASSIST) 
-    and strlower(spellLeft)~=strlower(HEALBOT_STOP) and strsub(strlower(spellLeft),1,4)~=strlower(HEALBOT_TELL) then
+    and strlower(spellLeft)~=strlower(HEALBOT_STOP) and strsub(strlower(spellLeft),1,strlen(HEALBOT_TELL))~=strlower(HEALBOT_TELL) then
         x=GetMacroIndexByName(spellLeft)
         if x==0 then spellLeft, spellLeftShow = HealBot_Tooltip_GetHealSpell(unit,spellLeft,uName) end
     end
     if  spellMiddle and strlower(spellMiddle)~=strlower(HEALBOT_DISABLED_TARGET) and strlower(spellMiddle)~=strlower(HEALBOT_ASSIST) 
     and strlower(spellMiddle)~=strlower(HEALBOT_FOCUS) and strlower(spellMiddle)~=strlower(HEALBOT_MENU) and strlower(spellMiddle)~=strlower(HEALBOT_HBMENU) 
     and strlower(spellMiddle)~=strlower(HEALBOT_MAINTANK) and strlower(spellMiddle)~=strlower(HEALBOT_MAINASSIST) 
-    and strlower(spellMiddle)~=strlower(HEALBOT_STOP) and strsub(strlower(spellMiddle),1,4)~=strlower(HEALBOT_TELL) then
+    and strlower(spellMiddle)~=strlower(HEALBOT_STOP) and strsub(strlower(spellMiddle),1,strlen(HEALBOT_TELL))~=strlower(HEALBOT_TELL) then
         x=GetMacroIndexByName(spellMiddle)
         if x==0 then spellMiddle, spellMiddleShow = HealBot_Tooltip_GetHealSpell(unit,spellMiddle,uName) end
     end
     if  spellRight and strlower(spellRight)~=strlower(HEALBOT_DISABLED_TARGET) and strlower(spellRight)~=strlower(HEALBOT_ASSIST) 
     and strlower(spellRight)~=strlower(HEALBOT_FOCUS) and strlower(spellRight)~=strlower(HEALBOT_MENU) and strlower(spellRight)~=strlower(HEALBOT_HBMENU) 
     and strlower(spellRight)~=strlower(HEALBOT_MAINTANK) and strlower(spellRight)~=strlower(HEALBOT_MAINASSIST) 
-    and strlower(spellRight)~=strlower(HEALBOT_STOP) and strsub(strlower(spellRight),1,4)~=strlower(HEALBOT_TELL) then
+    and strlower(spellRight)~=strlower(HEALBOT_STOP) and strsub(strlower(spellRight),1,strlen(HEALBOT_TELL))~=strlower(HEALBOT_TELL) then
         x=GetMacroIndexByName(spellRight)
         if x==0 then spellRight, spellRightShow = HealBot_Tooltip_GetHealSpell(unit,spellRight,uName) end
     end
     if  spellButton4 and strlower(spellButton4)~=strlower(HEALBOT_DISABLED_TARGET) and strlower(spellButton4)~=strlower(HEALBOT_ASSIST) 
     and strlower(spellButton4)~=strlower(HEALBOT_FOCUS) and strlower(spellButton4)~=strlower(HEALBOT_MENU) and strlower(spellButton4)~=strlower(HEALBOT_HBMENU)  
     and strlower(spellButton4)~=strlower(HEALBOT_MAINTANK) and strlower(spellButton4)~=strlower(HEALBOT_MAINASSIST) 
-    and strlower(spellButton4)~=strlower(HEALBOT_STOP) and strsub(strlower(spellButton4),1,4)~=strlower(HEALBOT_TELL) then
+    and strlower(spellButton4)~=strlower(HEALBOT_STOP) and strsub(strlower(spellButton4),1,strlen(HEALBOT_TELL))~=strlower(HEALBOT_TELL) then
         x=GetMacroIndexByName(spellButton4)
         if x==0 then spellButton4, spellButton4Show = HealBot_Tooltip_GetHealSpell(unit,spellButton4,uName) end
     end
     if  spellButton5 and strlower(spellButton5)~=strlower(HEALBOT_DISABLED_TARGET) and strlower(spellButton5)~=strlower(HEALBOT_ASSIST) 
     and strlower(spellButton5)~=strlower(HEALBOT_FOCUS) and strlower(spellButton5)~=strlower(HEALBOT_MENU) and strlower(spellButton5)~=strlower(HEALBOT_HBMENU) 
     and strlower(spellButton5)~=strlower(HEALBOT_MAINTANK) and strlower(spellButton5)~=strlower(HEALBOT_MAINASSIST) 
-    and strlower(spellButton5)~=strlower(HEALBOT_STOP) and strsub(strlower(spellButton5),1,4)~=strlower(HEALBOT_TELL) then
+    and strlower(spellButton5)~=strlower(HEALBOT_STOP) and strsub(strlower(spellButton5),1,strlen(HEALBOT_TELL))~=strlower(HEALBOT_TELL) then
         x=GetMacroIndexByName(spellButton5)
         if x==0 then spellButton5, spellButton5Show = HealBot_Tooltip_GetHealSpell(unit,spellButton5,uName) end
     end
@@ -202,7 +202,7 @@ function HealBot_Action_RefreshTooltip(unit, state)
                 end
                 text = HealBot_UnitSpec[xGUID] or " "
                 HealBot_Tooltip_SetLineLeft(uName,r,g,b,linenum,1)
-                HealBot_Tooltip_SetLineRight("Level "..UnitLevel(unit)..text..UnitClass(unit),r,g,b,linenum,1)         
+                HealBot_Tooltip_SetLineRight((LEVEL or "Level").." "..UnitLevel(unit)..text..UnitClass(unit),r,g,b,linenum,1)         
             else 
                 HealBot_Tooltip_SetLineLeft(uName,r,g,b,linenum,1)   
             end      
@@ -234,7 +234,7 @@ function HealBot_Action_RefreshTooltip(unit, state)
                 end
             end
             linenum=linenum+1
-            if zone and not strfind(zone,"Level") then
+            if zone and not strfind(zone,LEVEL or "Level") then
                 -- HealBot_Tooltip_SetLineLeft(HEALBOT_TOOLTIP_LOCATION..":",1,1,0.5,linenum,1);
                 if UnitOffline then -- added by Diacono
                     HealBot_Tooltip_SetLineLeft(HB_TOOLTIP_OFFLINE..": "..UnitOffline,1,1,1,linenum,1)
@@ -266,13 +266,13 @@ function HealBot_Action_RefreshTooltip(unit, state)
             if DebuffType then
                 linenum=linenum+1
                 if HealBot_Config.CDCBarColour[HealBot_UnitDebuff[xGUID]["name"]] then
-                    HealBot_Tooltip_SetLineLeft(uName.." suffers from "..HealBot_UnitDebuff[xGUID]["name"],
+                    HealBot_Tooltip_SetLineLeft(uName..HEALBOT_SUFFERS_FROM..HealBot_UnitDebuff[xGUID]["name"],
                                                 HealBot_Config.CDCBarColour[HealBot_UnitDebuff[xGUID]["name"]].R+0.2,
                                                 HealBot_Config.CDCBarColour[HealBot_UnitDebuff[xGUID]["name"]].G+0.2,
                                                 HealBot_Config.CDCBarColour[HealBot_UnitDebuff[xGUID]["name"]].B+0.2,
                                                 linenum,1)
                 else
-                    HealBot_Tooltip_SetLineLeft(uName.." suffers from "..HealBot_UnitDebuff[xGUID]["name"],
+                    HealBot_Tooltip_SetLineLeft(uName..HEALBOT_SUFFERS_FROM..HealBot_UnitDebuff[xGUID]["name"],
                                                 HealBot_Config.CDCBarColour[DebuffType].R+0.2,
                                                 HealBot_Config.CDCBarColour[DebuffType].G+0.2,
                                                 HealBot_Config.CDCBarColour[DebuffType].B+0.2,
@@ -284,7 +284,7 @@ function HealBot_Action_RefreshTooltip(unit, state)
             if uBuff then
                 linenum=linenum+1
                 br,bg,bb=HealBot_Options_RetBuffRGB(uBuff)
-                HealBot_Tooltip_SetLineLeft("  Requires "..uBuff,br,bg,bb,linenum,1)
+                HealBot_Tooltip_SetLineLeft("  "..HEALBOT_WORD_REQUIRES.." "..uBuff,br,bg,bb,linenum,1)
                 HealBot_Tooltip_SetLineRight(" ",0,0,0,linenum,0)
             end
             if HealBot_Config.Tooltip_ShowMyBuffs==1 then
@@ -298,10 +298,10 @@ function HealBot_Action_RefreshTooltip(unit, state)
                         linenum=linenum+1
                         br,bg,bb=HealBot_Options_RetBuffRGB(y)
                         if mins>0 then 
-                            HealBot_Tooltip_SetLineLeft("    "..x.."  "..mins..":"..secs.." mins",br,bg,bb,linenum,1)
+                            HealBot_Tooltip_SetLineLeft("    "..x.."  "..mins..":"..secs.." "..HEALBOT_WORDS_MIN,br,bg,bb,linenum,1)
                             HealBot_Tooltip_SetLineRight(" ",0,0,0,linenum,0)
                         elseif tonumber(secs)>=0 and mins==0 then
-                            HealBot_Tooltip_SetLineLeft("    "..x.."  "..secs.." secs",br,bg,bb,linenum,1)
+                            HealBot_Tooltip_SetLineLeft("    "..x.."  "..secs.." "..HEALBOT_WORDS_SEC,br,bg,bb,linenum,1)
                             HealBot_Tooltip_SetLineRight(" ",0,0,0,linenum,0)
                         else
                             linenum=linenum-1
@@ -312,8 +312,8 @@ function HealBot_Action_RefreshTooltip(unit, state)
             end
             if d then linenum=linenum+1 end
             if HealBot_Config.ProtectPvP==1 and UnitIsPVP(unit) and not UnitIsPVP("player") and not HealBot_PeacemakerGroupHeal(unit) then 
-                HealBot_Tooltip_SetLineLeft("    ----- PVP -----",1,0.5,0.5,linenum,1);
-                HealBot_Tooltip_SetLineRight("----- PVP -----    ",1,0.5,0.5,linenum,1);
+                HealBot_Tooltip_SetLineLeft("    ----- "..HEALBOT_PVP_TEXT.." -----",1,0.5,0.5,linenum,1);
+                HealBot_Tooltip_SetLineRight("----- "..HEALBOT_PVP_TEXT.." -----    ",1,0.5,0.5,linenum,1);
                 linenum=linenum+1;
             end
         end
@@ -451,7 +451,7 @@ function HealBot_Action_RefreshTooltip(unit, state)
         end
         if not Instant_check then
             linenum=linenum+1
-            HealBot_Tooltip_SetLineLeft("  None",0.4,0.4,0.4,linenum,1) 
+            HealBot_Tooltip_SetLineLeft("  "..HEALBOT_WORDS_NONE,0.4,0.4,0.4,linenum,1) 
         end
     else
         if HealBot_Config.Tooltip_ShowSpellDetail==1 then linenum=linenum-1; end
@@ -482,7 +482,7 @@ function HealBot_Tooltip_SpellInfo(spellName)
         if HealBot_Spells[spellName].HealsDur>0 then
             linenum=linenum+1
             HealBot_Tooltip_SetLineLeft(HEALBOT_WORDS_CAST..": "..HealBot_Spells[spellName].CastTime.." "..HEALBOT_WORDS_SEC..".",0.8,0.8,0.8,linenum,1)
-            HealBot_Tooltip_SetLineRight("Mana: "..HealBot_Spells[spellName].Mana,0.5,0.5,1,linenum,1) 
+            HealBot_Tooltip_SetLineRight(HEALBOT_WORD_MANA..": "..HealBot_Spells[spellName].Mana,0.5,0.5,1,linenum,1) 
             if HealBot_Spells[spellName].HealsMax>0 then
                 Heals = HEALBOT_HEAL.." "
                 if HealBot_Spells[spellName].Shield then
@@ -499,7 +499,7 @@ function HealBot_Tooltip_SpellInfo(spellName)
                 HealBot_Tooltip_SetLineLeft(text,1,1,1,linenum,1)
             end
             if HealBot_Spells[spellName].HealsExt>0 then
-                text=HEALBOT_HEAL.." "..HealBot_Spells[spellName].HealsDur.." "..HEALBOT_WORDS_OVER.." "..HealBot_Spells[spellName].Duration-HealBot_Spells[spellName].CastTime.." sec."
+                text=HEALBOT_HEAL.." "..HealBot_Spells[spellName].HealsDur.." "..HEALBOT_WORDS_OVER.." "..HealBot_Spells[spellName].Duration-HealBot_Spells[spellName].CastTime.." "..HEALBOT_WORDS_SEC.."."
                 linenum=linenum+1
                 HealBot_Tooltip_SetLineLeft(text,1,1,1,linenum,1)
             end
@@ -512,7 +512,7 @@ function HealBot_Tooltip_SpellInfo(spellName)
     elseif HealBot_OtherSpells[spellName] then
         linenum=linenum+1
         HealBot_Tooltip_SetLineLeft(HEALBOT_WORDS_CAST..": "..HealBot_OtherSpells[spellName].CastTime.." "..HEALBOT_WORDS_SEC..".",0.8,0.8,0.8,linenum,1) 
-        HealBot_Tooltip_SetLineRight("Mana: "..HealBot_OtherSpells[spellName].Mana,0.5,0.5,1,linenum,1)    
+        HealBot_Tooltip_SetLineRight(HEALBOT_WORD_MANA..": "..HealBot_OtherSpells[spellName].Mana,0.5,0.5,1,linenum,1)    
     end
 end
 
@@ -544,7 +544,7 @@ function HealBot_Tooltip_SpellSummary(spellName)
             -- ret_val=ret_val.." "..HEALBOT_WORDS_FOR.." "..HealBot_Spells[spellName].Mana.." Mana";
         end
     elseif HealBot_OtherSpells[spellName] then
-        ret_val = " -  "..HealBot_OtherSpells[spellName].Mana.." Mana"
+        ret_val = " -  "..HealBot_OtherSpells[spellName].Mana.." "..HEALBOT_WORD_MANA
     else
         ret_heal=-1;
     end
@@ -604,7 +604,7 @@ function HealBot_Action_RefreshTargetTooltip(hbGUID, unit)
     HealBot_Tooltip_SetLineLeft(HealBot_UnitName[hbGUID],r,g,b,linenum,1)
     if UnitClass(unit) then
         text = HealBot_UnitSpec[hbGUID] or " "
-        HealBot_Tooltip_SetLineRight(" Level "..UnitLevel(unit)..text..UnitClass(unit),r,g,b,linenum,1);
+        HealBot_Tooltip_SetLineRight(" "..(LEVEL or "Level").." "..UnitLevel(unit)..text..UnitClass(unit),r,g,b,linenum,1);
     end
     linenum=linenum+1
     HealBot_Tooltip_SetLineLeft(HEALBOT_TOOLTIP_TARGETBAR,1,1,0.5,linenum,1);

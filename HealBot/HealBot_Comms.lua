@@ -194,10 +194,12 @@ local tMajor, tMinor, tPatch, tHealbot = 0,0,0,0
 local hbVersionChecked = {}
 local tNewVer=nil
 function HealBot_Comms_CheckVer(userName, version)
+    if type(version)~="string" then return end
     if not hbVersionChecked[userName] then
         tNewVer=nil
-        hbVersionChecked[userName]=true
         tMajor, tMinor, tPatch, tHealbot = string.split(".", version)
+        if not (tonumber(tMajor) and tonumber(tMinor) and tonumber(tPatch) and tonumber(tHealbot)) then return end
+        hbVersionChecked[userName]=true
         if tonumber(tMajor)>tonumber(hbMajor) then 
             tNewVer=true
         elseif tonumber(tMajor)==tonumber(hbMajor) and tonumber(tMinor)>tonumber(hbMinor) then 
@@ -233,24 +235,24 @@ function HealBot_Comms_OnShow(self)
     HealBot_Error_Versionx:SetText(HEALBOT_WORD_VERSION.."="..HEALBOT_VERSION)
     HealBot_Error_Classx:SetText(HEALBOT_SORTBY_CLASS.."="..HealBot_PlayerClassEN)
     if HealBot_Config.AcceptSkins==1 then
-        HealBot_Info_AcceptSkinsVal:SetText("ON")
+        HealBot_Info_AcceptSkinsVal:SetText(HEALBOT_WORD_ON)
         HealBot_Info_AcceptSkinsVal:SetTextColor(0.1,1,0.1)
     else
-        HealBot_Info_AcceptSkinsVal:SetText("OFF")
+        HealBot_Info_AcceptSkinsVal:SetText(HEALBOT_WORD_OFF)
         HealBot_Info_AcceptSkinsVal:SetTextColor(0.88,0.1,0.1)
     end
     if HealBot_Config.MacroSuppressError==1 then
-        HealBot_Info_SuppressErrorsVal:SetText("ON")
+        HealBot_Info_SuppressErrorsVal:SetText(HEALBOT_WORD_ON)
         HealBot_Info_SuppressErrorsVal:SetTextColor(0.1,1,0.1)
     else
-        HealBot_Info_SuppressErrorsVal:SetText("OFF")
+        HealBot_Info_SuppressErrorsVal:SetText(HEALBOT_WORD_OFF)
         HealBot_Info_SuppressErrorsVal:SetTextColor(0.88,0.1,0.1)
     end
     if HealBot_Config.MacroSuppressSound==1 then
-        HealBot_Info_SuppressSoundsVal:SetText("ON")
+        HealBot_Info_SuppressSoundsVal:SetText(HEALBOT_WORD_ON)
         HealBot_Info_SuppressSoundsVal:SetTextColor(0.1,1,0.1)
     else
-        HealBot_Info_SuppressSoundsVal:SetText("OFF")
+        HealBot_Info_SuppressSoundsVal:SetText(HEALBOT_WORD_OFF)
         HealBot_Info_SuppressSoundsVal:SetTextColor(0.88,0.1,0.1)
     end
 end

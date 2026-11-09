@@ -19,6 +19,7 @@ HEALBOT_SHAMAN  = "Шаман";
 HEALBOT_WARLOCK = "Чернокнижник";
 HEALBOT_WARRIOR = "Воин";
 HEALBOT_DEATHKNIGHT = "Рыцарь cмерти";
+HEALBOT_NEW_ITEMS = "Предметы";
 
 HEALBOT_SILK_BANDAGE                 = GetItemInfo(6450) or "Шелковые бинты";
 HEALBOT_HEAVY_SILK_BANDAGE           = GetItemInfo(6451) or "Плотные шелковые бинты";
@@ -237,6 +238,21 @@ HEALBOT_HYSTERIA                = GetSpellInfo(49016);
 HEALBOT_INNERVATE               = GetSpellInfo(29166);
 HEALBOT_HAND_OF_GOD             = GetSpellInfo(304704) or "Божья длань";
 HEALBOT_GODS_GRACE              = GetSpellInfo(319166) or "Божья милость";
+HEALBOT_HAND_OF_THE_GUARDIANS   = GetSpellInfo(313104) or "Длань Хранителя";
+HEALBOT_TOUCH_OF_THE_TITANS     = GetSpellInfo(313106) or "Касание Титанов";
+HEALBOT_ACCESSORY_HEALING       = GetSpellInfo(311060) or "Целительное зелье";
+HEALBOT_COVER_OF_LIGHT          = GetSpellInfo(319738) or "Покров света";
+HEALBOT_RESIDUAL_SHINE          = GetSpellInfo(319540) or "Остаточное сияние (T6)";
+HEALBOT_THE_GIFT_OF_ISERA       = GetSpellInfo(308090) or "Дар Изеры";
+HEALBOT_FLOWERING_PERIOD        = GetSpellInfo(308093) or "Период цветения";
+HEALBOT_BLOSSOMING              = GetSpellInfo(308094) or "Расцвет";
+HEALBOT_RENEWAL                 = GetSpellInfo(305081) or "Обновление (Т4)";
+HEALBOT_AURA_MASTER             = GetSpellInfo(31821) or "Мастер аур";
+HEALBOT_DIVINE_GUARDIAN         = GetSpellInfo(70940) or "Божественный страж";
+HEALBOT_SACRED_SACRIFICE        = GetSpellInfo(64205) or "Священная жертва";
+HEALBOT_HEALING_RAIN            = GetSpellInfo(308017) or "Целительный Ливень";
+HEALBOT_PRIMEVAL_MOISTURE       = GetSpellInfo(308015) or "Первозданная влага";
+HEALBOT_ICE_BLOCK               = GetSpellInfo(45438) or "Ледяная глыба";
 
 HEALBOT_A_MONKEY           = GetSpellInfo(13163) or "Дух обезьяны";
 HEALBOT_A_HAWK             = GetSpellInfo(13165) or "Дух ястреба";
@@ -366,7 +382,7 @@ HEALBOT_DEBUFF_PACT_DARKFALLEN  = GetSpellInfo(71340);
 HEALBOT_DEBUFF_ESSENCE_BLOOD_QUEEN = GetSpellInfo(70867);
 HEALBOT_DEBUFF_DELIRIOUS_SLASH  = GetSpellInfo(71624);
 HEALBOT_DEBUFF_CORROSION        = GetSpellInfo(70751);
-HEALBOT_DEBUFF_GUT_SRPAY        = GetSpellInfo(70633);
+HEALBOT_DEBUFF_GUT_SPRAY        = GetSpellInfo(70633);
 HEALBOT_DEBUFF_ICE_TOMB         = GetSpellInfo(70157);
 HEALBOT_DEBUFF_FROST_BEACON     = GetSpellInfo(70126);
 HEALBOT_DEBUFF_CHILLED_BONE     = GetSpellInfo(70106);
@@ -424,8 +440,8 @@ HB_TOOLTIP_INSTANT_CAST          = SPELL_CAST_TIME_INSTANT_NO_MANA;
 HB_TOOLTIP_CAST_TIME             = "Применение: (%d+.?%d*) сек";
 HB_TOOLTIP_CHANNELED             = SPELL_CAST_CHANNELED;
 HB_TOOLTIP_OFFLINE               = PLAYER_OFFLINE;
-HB_OFFLINE                     = PLAYER_OFFLINE; -- has gone offline msg
-HB_ONLINE                      = GUILD_ONLINE_LABEL; -- has come online msg
+HB_OFFLINE                     = "выходит из игрового мира"; -- has gone offline msg
+HB_ONLINE                      = "входит в игровой мир"; -- has come online msg
 
 -----------------
 -- Translation --
@@ -444,10 +460,11 @@ HEALBOT_OPTIONS_SOFTRESET     = "СбросHB"
 HEALBOT_OPTIONS_INFO          = "Инфо"
 HEALBOT_OPTIONS_TAB_GENERAL   = "Общее";
 HEALBOT_OPTIONS_TAB_SPELLS    = "Заклинания";
-HEALBOT_OPTIONS_TAB_HEALING   = "Изцеление";
+HEALBOT_OPTIONS_TAB_HEALING   = "Исцеление";
 HEALBOT_OPTIONS_TAB_CDC       = "Излечение";
 HEALBOT_OPTIONS_TAB_SKIN      = "Шкурки";
-HEALBOT_OPTIONS_TAB_BUFFS     = "Бафы";
+HEALBOT_OPTIONS_TAB_TIPS      = "Подсказки";
+HEALBOT_OPTIONS_TAB_BUFFS     = "Баффы";
 
 HEALBOT_OPTIONS_PANEL_TEXT     = "Настройки панели исцеления";
 HEALBOT_OPTIONS_BARALPHA       = "Прозрач-ть включеных";
@@ -474,7 +491,7 @@ HEALBOT_SORTBY_NAME            = "Имя";
 HEALBOT_SORTBY_CLASS           = "Класс";
 HEALBOT_SORTBY_GROUP           = "Группа";
 HEALBOT_SORTBY_MAXHEALTH       = "Макс здоровья";
-HEALBOT_OPTIONS_NEWDEBUFFTEXT  = "Нов.Дебаф"
+HEALBOT_OPTIONS_NEWDEBUFFTEXT  = "Нов.Дебафф"
 HEALBOT_OPTIONS_DELSKIN        = "Удалить";
 HEALBOT_OPTIONS_NEWSKINTEXT    = "Нов.Шкурка";
 HEALBOT_OPTIONS_SAVESKIN       = "Сохранить";
@@ -482,7 +499,7 @@ HEALBOT_OPTIONS_SKINBARS       = "Опции панели";
 HEALBOT_OPTIONS_SKINPANEL      = "Цвета панели";
 HEALBOT_SKIN_ENTEXT            = "Включить";
 HEALBOT_SKIN_DISTEXT           = "Выключить";
-HEALBOT_SKIN_DEBTEXT           = "Дебаф";
+HEALBOT_SKIN_DEBTEXT           = "Дебафф";
 HEALBOT_SKIN_BACKTEXT          = "Фон";
 HEALBOT_SKIN_BORDERTEXT        = "Края";
 HEALBOT_OPTIONS_SKINFONT       = "Шрифт"
@@ -512,10 +529,10 @@ HEALBOT_OPTIONS_CDCBARS        = "Цвета полос";
 HEALBOT_OPTIONS_CDCSHOWHBARS   = "На полосе здоровья";
 HEALBOT_OPTIONS_CDCSHOWABARS   = "На полосе угрозы";
 HEALBOT_OPTIONS_CDCCLASS       = "Монитор классов";
-HEALBOT_OPTIONS_CDCWARNINGS    = "Предупреждения о дебафах";
-HEALBOT_OPTIONS_SHOWDEBUFFICON = "Иконки дебафов";
-HEALBOT_OPTIONS_SHOWDEBUFFWARNING   = "Сообщения о дебафах";
-HEALBOT_OPTIONS_SOUNDDEBUFFWARNING  = "Звук при дебафе";
+HEALBOT_OPTIONS_CDCWARNINGS    = "Предупреждения о дебаффах";
+HEALBOT_OPTIONS_SHOWDEBUFFICON = "Иконки дебаффов";
+HEALBOT_OPTIONS_SHOWDEBUFFWARNING   = "Сообщения о дебаффах";
+HEALBOT_OPTIONS_SOUNDDEBUFFWARNING  = "Звук при дебаффе";
 HEALBOT_OPTIONS_SOUND          = "Звук"
 HEALBOT_OPTIONS_SOUND1         = "Звук 1"
 HEALBOT_OPTIONS_SOUND2         = "Звук 2"
@@ -524,9 +541,10 @@ HEALBOT_OPTIONS_SOUND3         = "Звук 3"
 HEALBOT_OPTIONS_HEAL_BUTTONS   = "Панели исцелений:";
 HEALBOT_OPTIONS_SELFHEALS      = "Себя"
 HEALBOT_OPTIONS_PETHEALS       = "Питомцев"
-HEALBOT_OPTIONS_GROUPHEALS     = "Группу";
+HEALBOT_OPTIONS_GROUPHEALS     = "Группа";
 HEALBOT_OPTIONS_TANKHEALS      = "Главных танков";
 HEALBOT_OPTIONS_MAINASSIST    = "Наводчик";
+HEALBOT_OPTIONS_PRIVATETANKS  = "Личных главных танков";
 HEALBOT_OPTIONS_TARGETHEALS    = "Цели";
 HEALBOT_OPTIONS_EMERGENCYHEALS = "Рейд";
 HEALBOT_OPTIONS_ALERTLEVEL     = "Тревога";
@@ -574,6 +592,7 @@ HEALBOT_TOOLTIP_ACTUALBONUS     = "Актуальный бонус";
 HEALBOT_TOOLTIP_SHIELD          = "Защита";
 HEALBOT_TOOLTIP_LOCATION        = "Локация";
 HEALBOT_TOOLTIP_CORPSE          = "Труп ";
+HEALBOT_SUFFERS_FROM            = " страдает от ";
 HEALBOT_WORDS_OVER              = "в течение";
 HEALBOT_WORDS_SEC               = "сек";
 HEALBOT_WORDS_TO                = "-";
@@ -620,23 +639,23 @@ HEALBOT_SKIN_HEADERTEXTCOL      = "Цвета текста";
 HEALBOT_OPTIONS_BUFFSTEXT1      = "Заклинание";
 HEALBOT_OPTIONS_BUFFSTEXT2      = "Проверка";
 HEALBOT_OPTIONS_BUFFSTEXT3      = "Цвета панелей";
-HEALBOT_OPTIONS_BUFF            = "Баф";
+HEALBOT_OPTIONS_BUFF            = "Бафф";
 HEALBOT_OPTIONS_BUFFSELF        = "на себя";
 HEALBOT_OPTIONS_BUFFPARTY       = "на группу";
 HEALBOT_OPTIONS_BUFFRAID        = "на рейд";
-HEALBOT_OPTIONS_MONITORBUFFS    = "Монитор пропущенных бафов";
+HEALBOT_OPTIONS_MONITORBUFFS    = "Монитор пропущенных баффов";
 HEALBOT_OPTIONS_MONITORBUFFSC   = "также в бою";
-HEALBOT_OPTIONS_ENABLESMARTCAST = "БыстроеЧтение когда в не боя";
+HEALBOT_OPTIONS_ENABLESMARTCAST = "БыстроеЧтение, когда в не боя";
 HEALBOT_OPTIONS_SMARTCASTSPELLS = "Заклинания";
-HEALBOT_OPTIONS_SMARTCASTDISPELL = "Расс-ть дебаф";
-HEALBOT_OPTIONS_SMARTCASTBUFF   = "Добавить баф";
+HEALBOT_OPTIONS_SMARTCASTDISPELL = "Расс-ть дебафф";
+HEALBOT_OPTIONS_SMARTCASTBUFF   = "Добавить бафф";
 HEALBOT_OPTIONS_SMARTCASTHEAL   = "Исцеления";
 HEALBOT_OPTIONS_BAR2SIZE        = "Размер полосы маны";
 HEALBOT_OPTIONS_SETSPELLS       = "Заклинания";
 HEALBOT_OPTIONS_ENABLEDBARS     = "Включить панели";
-HEALBOT_OPTIONS_DISABLEDBARS    = "Отключить панели когда в не боя";
-HEALBOT_OPTIONS_MONITORDEBUFFS  = "Монитор снятия дебафов";
-HEALBOT_OPTIONS_DEBUFFTEXT1     = "Зак-ние снимающее дебафы";
+HEALBOT_OPTIONS_DISABLEDBARS    = "Отключить панели, когда в не боя";
+HEALBOT_OPTIONS_MONITORDEBUFFS  = "Монитор снятия дебаффов";
+HEALBOT_OPTIONS_DEBUFFTEXT1     = "Зак-ние снимающее дебаффы";
 
 HEALBOT_OPTIONS_IGNOREDEBUFF          = "Игнорировать:";
 HEALBOT_OPTIONS_IGNOREDEBUFFCLASS     = "По классам";
@@ -662,8 +681,8 @@ HEALBOT_STOP        = "Стоп";
 HEALBOT_TELL        = "Сказать";
 
 HEALBOT_TITAN_SMARTCAST             = "БыстроеЧтение";
-HEALBOT_TITAN_MONITORBUFFS          = "Монитор бафов";
-HEALBOT_TITAN_MONITORDEBUFFS        = "Монитор дебафов"
+HEALBOT_TITAN_MONITORBUFFS          = "Монитор баффов";
+HEALBOT_TITAN_MONITORDEBUFFS        = "Монитор дебаффов"
 HEALBOT_TITAN_SHOWBARS              = "Панели для";
 HEALBOT_TITAN_EXTRABARS             = "Доп. панели";
 HEALBOT_BUTTON_TOOLTIP              = "ЛКМ переключает окно настроек HealBotа\nПКМ (Удерживая) для перемещения";
@@ -676,7 +695,7 @@ HEALBOT_OPTIONS_HOTOFFBAR           = "Снаружи";
 HEALBOT_OPTIONS_HOTBARRIGHT         = "Справа";
 HEALBOT_OPTIONS_HOTBARLEFT          = "Слева";
 
-HEALBOT_OPTIONS_ENABLETARGETSTATUS = "Включенные настройки когда цель в бою";
+HEALBOT_OPTIONS_ENABLETARGETSTATUS = "Включенные настройки, когда цель в бою";
 
 HEALBOT_ZONE_AB   = "Низина Арати";
 HEALBOT_ZONE_AV   = "Альтеракская долина";
@@ -694,6 +713,7 @@ HEALBOT_OPTION_CPUPROFILE    = "Использовать профайлер CPU 
 HEALBOT_OPTIONS_RELOADUIMSG = "Для того чтобы настройки вступили бы в силу необходима перезагрузка интерфейса, Готовы?";
 
 HEALBOT_SELF_PVP             = "Своё ПвП";
+HEALBOT_PVP_TEXT             = "PvP"
 HEALBOT_OPTIONS_ANCHOR       = "Якорь фрейма";
 HEALBOT_OPTIONS_BARSANCHOR   = "Якорь полос"
 HEALBOT_OPTIONS_TOPLEFT      = "Вверху слева";
@@ -714,11 +734,11 @@ HEALBOT_TOOLTIP_TARGETBAR    = "Панель цели";
 HEALBOT_OPTIONS_MYTARGET     = "Моя цель";
 
 HEALBOT_DISCONNECTED_TEXT           = "<ОФФ>"
-HEALBOT_OPTIONS_SHOWUNITBUFFTIME    = "Показ.мои бафы";
+HEALBOT_OPTIONS_SHOWUNITBUFFTIME    = "Показ.мои баффы";
 HEALBOT_OPTIONS_TOOLTIPUPDATE       = "Постоянно обновлять";
-HEALBOT_OPTIONS_BUFFSTEXTTIMER      = "Показ баф перед окончанием";
-HEALBOT_OPTIONS_SHORTBUFFTIMER      = "Короткие бафы"
-HEALBOT_OPTIONS_LONGBUFFTIMER       = "Длинные бафы"
+HEALBOT_OPTIONS_BUFFSTEXTTIMER      = "Показ бафф перед окончанием";
+HEALBOT_OPTIONS_SHORTBUFFTIMER      = "Короткие баффы"
+HEALBOT_OPTIONS_LONGBUFFTIMER       = "Длинные баффы"
 
 HEALBOT_BALANCE       = "Баланс"
 HEALBOT_FERAL         = "Сила зверя"
@@ -748,7 +768,7 @@ HEALBOT_DESTRUCTION   = "Разрушение"
 HEALBOT_BLOOD         = "Кровь"
 HEALBOT_UNHOLY        = "Нечестивость"
 
-HEALBOT_OPTIONS_VISIBLERANGE = "Отключать панель когда расстояние больше 100 метров"
+HEALBOT_OPTIONS_VISIBLERANGE = "Отключать панель, когда расстояние больше 100 метров"
 HEALBOT_OPTIONS_NOTIFY_HEAL_MSG  = "Сообщения о исцелении"
 HEALBOT_OPTIONS_NOTIFY_OTHER_MSG = "Другие сообщения"
 HEALBOT_WORDS_YOU                = "вы";
@@ -801,14 +821,17 @@ HEALBOT_HELP={ [1] = "[HealBot] /hb h -- показать справку",
               }
               
 HEALBOT_OPTION_HIGHLIGHTACTIVEBAR   = "Выделять активную полосу"
+HEALBOT_OPTION_HIGHLIGHTTARGETBAR   = "Выделять полосу цели"
 HEALBOT_OPTIONS_TESTBARS            = "Тест полос"
 HEALBOT_OPTION_NUMBARS              = "Количество полос"
 HEALBOT_OPTION_NUMTANKS             = "Количество танков"
 HEALBOT_OPTION_NUMMYTARGETS         = "Количество моих целей"
-HEALBOT_OPTION_NUMPETS              = "Количество питов"
+HEALBOT_OPTION_NUMPETS              = "Количество питомцев"
 HEALBOT_WORD_TEST                   = "Тест";
 HEALBOT_WORD_OFF                    = "Выкл";
 HEALBOT_WORD_ON                     = "Вкл";
+HEALBOT_WORD_MANA                   = "Мана";
+HEALBOT_WORD_REQUIRES               = "Требуется";
 
 HEALBOT_OPTIONS_TAB_INCHEALS        = "Вхд. исцел."
 HEALBOT_OPTIONS_TAB_CHAT            = "Чат"
@@ -844,8 +867,8 @@ HEALBOT_OPTIONS_BUTTONCASTPRESSED   = "Нажата"
 HEALBOT_OPTIONS_BUTTONCASTRELEASED  = "Отпущена"
 
 HEALBOT_INFO_INCHEALINFO            = "== Инфо входящего исцеления =="
-HEALBOT_INFO_ADDONCPUUSAGE          = "== Исп. CPU аддоном в секундах =="
-HEALBOT_INFO_ADDONCOMMUSAGE         = "== Исп. коммуникации аддоном =="
+HEALBOT_INFO_ADDONCPUUSAGE          = "== Исп. CPU аддоном в сек. =="
+HEALBOT_INFO_ADDONCOMMUSAGE         = "== Коммуникация =="
 HEALBOT_WORD_HEALER                 = "Лекарь"
 HEALBOT_WORD_VERSION                = "Версия"
 HEALBOT_WORD_CLIENT                 = "Клиент"
@@ -872,7 +895,7 @@ HEALBOT_OPTIONS_BUTTONSHARESKIN     = "Поделиться с"
 
 HEALBOT_CHAT_ADDONID                = "[HealBot]  "
 HEALBOT_CHAT_NEWVERSION1            = "Доступна новая версия"
-HEALBOT_CHAT_NEWVERSION2            = "на http://healbot.alturl.com"
+HEALBOT_CHAT_NEWVERSION2            = "на https://github.com/sirus-addons/HealBot"
 HEALBOT_CHAT_SHARESKINERR1          = " Skin not found for Sharing"
 HEALBOT_CHAT_SHARESKINERR2          = "'s HealBot version is too old for Skin Sharing"
 HEALBOT_CHAT_SHARESKINERR3          = " not found for Skin Sharing"
@@ -889,7 +912,7 @@ HEALBOT_CHAT_SOFTRELOAD             = "Reload healbot requested"
 HEALBOT_CHAT_HARDRELOAD             = "Reload UI requested"
 HEALBOT_CHAT_CONFIRMSPELLRESET      = "Заклинания сброшены"
 HEALBOT_CHAT_CONFIRMCURESRESET      = "Лечения сброшены"
-HEALBOT_CHAT_CONFIRMBUFFSRESET      = "Бафы сброшены"
+HEALBOT_CHAT_CONFIRMBUFFSRESET      = "Баффы сброшены"
 HEALBOT_CHAT_POSSIBLEMISSINGMEDIA   = "Unable to receive all Skin settings - Possibly missing SharedMedia, see HealBot/Docs/readme.html for links"
 HEALBOT_CHAT_MACROSOUNDON           = "Sound not suppressed when using auto trinkets"
 HEALBOT_CHAT_MACROSOUNDOFF          = "Sound suppressed when using auto trinkets"
@@ -979,7 +1002,7 @@ HEALBOT_CUSTOM_CAT_LK_ICC_PLAGUEWORKS = "WotLK - ЦЛК Чумодельня"
 HEALBOT_CUSTOM_CAT_LK_ICC_CRIMSON     = "WotLK - ЦЛК Багровый зал"
 HEALBOT_CUSTOM_CAT_LK_ICC_FROSTWING   = "WotLK - ЦЛК Залы Ледокрылых"
 HEALBOT_CUSTOM_CAT_LK_ICC_THRONE      = "WotLK - ЦЛК Ледяной Трон"
-HEALBOT_WORD_RESET                    = "Сбросс"
+HEALBOT_WORD_RESET                    = "Сброс"
 HEALBOT_HBMENU                        = "HBmenu"
 HEALBOT_ACTION_HBFOCUS                = "Левый клик - установить\nфокус на цель"
 HEALBOT_WORD_CLEAR                    = "Очистить"
@@ -987,6 +1010,7 @@ HEALBOT_WORD_SET                      = "Установить"
 HEALBOT_WORD_HBFOCUS                  = "Фокус HealBot"
 HEALBOT_WORD_OUTSIDE                  = "Внешний мир"
 HEALBOT_WORD_ALLZONE                  = "Все зоны"
+HEALBOT_WORD_OTHER                    = "Прочее"
 
 
 
@@ -1003,24 +1027,36 @@ HEALBOT_OPTIONS_AGGROFLASHFREQ       = "Частота сверкания"
 HEALBOT_OPTIONS_AGGROFLASHALPHA      = "Прозрачность сверкания"
 HEALBOT_OPTIONS_SHOWDURATIONFROM     = "Длительность от"
 HEALBOT_OPTIONS_SHOWDURATIONWARN     = "Оповещение длительности от"
-HEALBOT_CMD_RESETCUSTOMDEBUFFS       = "Сброс своих дебафов"
+HEALBOT_CMD_RESETCUSTOMDEBUFFS       = "Сброс своих дебаффов"
 HEALBOT_CMD_RESETSKINS               = "Сброс шкурок"
 HEALBOT_CMD_CLEARBLACKLIST           = "Очистить черный список"
 HEALBOT_CMD_TOGGLEACCEPTSKINS        = "Переключение приёма шкурок от других"
 HEALBOT_CMD_COPYSPELLS               = "Копировать данное заклинание во все наборы"
 HEALBOT_CMD_RESETSPELLS              = "Сброс заклинаний"
 HEALBOT_CMD_RESETCURES               = "Сброс лечений"
-HEALBOT_CMD_RESETBUFFS               = "Сброс бафов"
-HEALBOT_CMD_RESETBARS                = "Сброс позицый панелей"
+HEALBOT_CMD_RESETBUFFS               = "Сброс баффов"
+HEALBOT_CMD_RESETBARS                = "Сброс позиций панелей"
 HEALBOT_CMD_TOGGLETITAN              = "Переключить обновления титана"
-HEALBOT_CMD_SUPPRESSSOUND            = "Переключение сдерживания звука когда используется авто аксессуар"
-HEALBOT_CMD_SUPPRESSERRORS           = "Переключение сдерживания ошибок когда используется авто аксессуар"
+HEALBOT_CMD_SUPPRESSSOUND            = "Переключение сдерживания звука, когда используется авто аксессуар"
+HEALBOT_CMD_SUPPRESSERRORS           = "Переключение сдерживания ошибок, когда используется авто аксессуар"
 HEALBOT_OPTIONS_COMMANDS             = "Команды HealBot"
 HEALBOT_WORD_RUN                     = "Пуск"
 HEALBOT_OPTIONS_MOUSEWHEEL              = "Включит меню на колесике мыши"
 HEALBOT_CMD_DELCUSTOMDEBUFF10           = "Delete custom debuffs on priority 10"
-HEALBOT_ACCEPTSKINS                     = "Принемать шкурки от других"
+HEALBOT_ACCEPTSKINS                     = "Принимать шкурки от других"
 HEALBOT_SUPPRESSSOUND                   = "Авто-Аксессуар: Подавлять звуки"
 HEALBOT_SUPPRESSERROR                   = "Авто-Аксессуар: Подавлять ошибки"
+HEALBOT_OPTIONS_CRASHPROT               = "Защита от сбоя"
+HEALBOT_CP_MACRO_LEN                    = "Имя макроса должно быть от 1 до 14 символов"
+HEALBOT_CP_MACRO_BASE                   = "Базовое имя макроса"
+HEALBOT_CP_MACRO_INFO                   = "Защита от сбоя позволяет HealBot восстановиться после отключения от сервера\nДля использования защиты от сбоя ДОЛЖНО быть 5 свободных ячеек макросов персонажа."
+HEALBOT_CP_MACRO_SAVE                   = "Последнее сохранение: "
+HEALBOT_CP_STARTTIME                    = "Длительность защиты при входе"
+
+HEALBOT_WORD_RESERVED                   = "Резерв"
+HEALBOT_OPTIONS_COMBATPROT              = "Защита в бою"
+HEALBOT_COMBATPROT_INFO                 = "Защита в бою позволяет HealBot лучше управлять\nизменениями в группе/рейде во время боя."
+HEALBOT_COMBATPROT_PARTYNO              = "полос в резерве для группы"
+HEALBOT_COMBATPROT_RAIDNO               = "полос в резерве для рейда"
 
 end
