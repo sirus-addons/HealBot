@@ -1984,6 +1984,7 @@ local mText=nil
 local mId=nil
 local showmenu=nil
 local showHBmenu=nil
+local HBFriendsDropDown=nil
 local setDropdown=nil
 local partyNo=nil
 local sTar, sTrin1, sTrin2=0, 0, 0
@@ -2002,7 +2003,10 @@ function HealBot_Action_SetButtonAttrib(button,bbutton,bkey,status,j)
     elseif status=="Disabled" then
         sName, sTar, sTrin1, sTrin2 = HealBot_Action_AttribDisSpellPattern(HB_combo_prefix)
     else
-        sName=nil;
+        sName, sTar, sTrin1, sTrin2=nil, 0, 0, 0
+    end
+    if sName and tonumber(sName) then
+        sName=GetSpellInfo(tonumber(sName))
     end
     if sName then
         if strlower(sName)==strlower(HEALBOT_DISABLED_TARGET) then
@@ -2025,10 +2029,10 @@ function HealBot_Action_SetButtonAttrib(button,bbutton,bkey,status,j)
             button:SetAttribute(HB_prefix.."type"..j, "macro")
             button:SetAttribute(HB_prefix.."macrotext"..j, "/stopcasting")
             hbAttribsMinReset[button.id..HB_prefix..status..j]=true
-        elseif strsub(strlower(sName),1,4)==strlower(HEALBOT_TELL) then
+        elseif strsub(strlower(sName),1,strlen(HEALBOT_TELL))==strlower(HEALBOT_TELL) then
             mText='/script local n=UnitName("hbtarget");SendChatMessage("hbMSG","WHISPER",nil,n)'
             mText=string.gsub(mText,"hbtarget",button.unit)
-            mText=string.gsub(mText,"hbMSG", strtrim(strsub(sName,5)))
+            mText=string.gsub(mText,"hbMSG", strtrim(strsub(sName,strlen(HEALBOT_TELL)+1)))
             button:SetAttribute(HB_prefix.."helpbutton"..j, nil);
             button:SetAttribute(HB_prefix.."type"..j, "macro")
             button:SetAttribute(HB_prefix.."macrotext"..j, mText)
@@ -2069,7 +2073,9 @@ function HealBot_Action_SetButtonAttrib(button,bbutton,bkey,status,j)
             button:SetAttribute(HB_prefix.."helpbutton"..j, nil);
             button:SetAttribute(HB_prefix.."type"..j, "showhbmenu")
             showHBmenu = function()
-                local HBFriendsDropDown = CreateFrame("Frame", "HealBot_Action_hbmenuFrame_DropDown", UIParent, "UIDropDownMenuTemplate");
+                if not HBFriendsDropDown then
+                    HBFriendsDropDown = CreateFrame("Frame", "HealBot_Action_hbmenuFrame_DropDown", UIParent, "UIDropDownMenuTemplate");
+                end
                 HBFriendsDropDown.unit = button.unit
                 HBFriendsDropDown.name = UnitName(button.unit)
                 HBFriendsDropDown.initialize = HealBot_Action_hbmenuFrame_DropDown_Initialize
@@ -2080,12 +2086,12 @@ function HealBot_Action_SetButtonAttrib(button,bbutton,bkey,status,j)
         elseif strlower(sName)==strlower(HEALBOT_MAINTANK) then
             button:SetAttribute(HB_prefix.."helpbutton"..j, nil);
             button:SetAttribute(HB_prefix.."type"..j, "maintank")
-            button:SetAttribute(HB_prefix.."type-maintank"..j, "toggle")
+            button:SetAttribute(HB_prefix.."action"..j, "toggle")
             hbAttribsMinReset[button.id..HB_prefix..status..j]=true
         elseif strlower(sName)==strlower(HEALBOT_MAINASSIST) then
             button:SetAttribute(HB_prefix.."helpbutton"..j, nil);
             button:SetAttribute(HB_prefix.."type"..j, "mainassist")
-            button:SetAttribute(HB_prefix.."type-mainassist"..j, "toggle")
+            button:SetAttribute(HB_prefix.."action"..j, "toggle")
             hbAttribsMinReset[button.id..HB_prefix..status..j]=true
         else
             sID=HealBot_GetSpellId(sName)
@@ -2485,6 +2491,7 @@ local hbClassCols = {
           ["SHAM"] = {r=0.14, g=0.35, b=1.0,  },
           ["WARL"] = {r=0.58, g=0.51, b=0.79, },
           ["DEAT"] = {r=0.78, g=0.04, b=0.04, },
+          ["DEMO"] = {r=0.64, g=0.19, b=0.79, },
           ["WARR"] = {r=0.78, g=0.61, b=0.43, },
       }
       
@@ -2500,7 +2507,8 @@ function HealBot_Action_ClassColour(hbGUID, unit)
     else
         class = "WARR"
     end
-    return hbClassCols[class].r, hbClassCols[class].g, hbClassCols[class].b
+    local col = hbClassCols[class] or hbClassCols["WARR"]
+    return col.r, col.g, col.b
 end
 
 function HealBot_Action_ShowTooltip(unit)
@@ -2675,7 +2683,9 @@ function HealBot_Action_HealUnit_Wheel(delta)
         ToggleDropDownMenu(1, nil, setDropdown, "cursor", 10, -8)  
     
     elseif strlower(HEALBOT_MOUSEWHEEL[delta])==strlower(HEALBOT_HBMENU) then
-        local HBFriendsDropDown = CreateFrame("Frame", "HealBot_Action_hbmenuFrame_DropDown", UIParent, "UIDropDownMenuTemplate");
+        if not HBFriendsDropDown then
+            HBFriendsDropDown = CreateFrame("Frame", "HealBot_Action_hbmenuFrame_DropDown", UIParent, "UIDropDownMenuTemplate");
+        end
         HBFriendsDropDown.unit = xUnit
         HBFriendsDropDown.name = UnitName(xUnit)
         HBFriendsDropDown.initialize = HealBot_Action_hbmenuFrame_DropDown_Initialize
@@ -3003,6 +3013,7 @@ function HealBot_Action_Toggle_Enabled(hbGUID)
 end
 
 function HealBot_Action_UseSmartCast(bp,hbGUID)
+    if InCombatLockdown() then return end
     sName=HealBot_Action_SmartCast(hbGUID);
     if sName then
         sID=HealBot_GetSpellId(sName)
@@ -3025,9 +3036,12 @@ function HealBot_Action_UseSmartCast(bp,hbGUID)
                 mText=string.gsub(mText,"hbtarget",bp.unit)
                 mText=string.gsub(mText,"hbtargettarget",bp.unit.."target")
                 mText=string.gsub(mText,"hbtargettargettarget",bp.unit.."targettarget")
+                bp:SetAttribute("helpbutton1", nil);
                 bp:SetAttribute("type1","macro")
                 bp:SetAttribute("macrotext1", mText)
             else
+                bp:SetAttribute("type1", "item");
+                bp:SetAttribute("item1", sName);
                 bp:SetAttribute("helpbutton1", "item1");
                 bp:SetAttribute("type-item1", "item");
                 bp:SetAttribute("item-item1", sName);
@@ -3042,15 +3056,21 @@ function HealBot_Action_PostClick(self,button)
     if self.id==999 and not IsModifierKeyDown() then
         HealBot_Panel_clickToFocus("hide")
     elseif usedSmartCast then
-        if self.unit=="target" then
+        if InCombatLockdown() then
+            HealBot_Action_SetAllAttribs()
+        elseif self.unit=="target" and Healbot_Config_Skins.TargetBarNormalMode[Healbot_Config_Skins.Current_Skin]==1 then
             if aj==1 then
-                self:SetAttribute(HB_prefix.."helpbutton"..aj, "target"..aj);
-                self:SetAttribute(HB_prefix.."type"..aj, "target")
-                self:SetAttribute(HB_prefix.."type-target"..aj, "target")
+                self:SetAttribute("helpbutton1", "target1");
+                self:SetAttribute("type1", "target")
+                self:SetAttribute("type-target1", "target")
+                self:SetAttribute("spell1", nil)
+                self:SetAttribute("type-heal1", nil)
+                self:SetAttribute("spell-heal1", nil)
             end
         else
             HealBot_Action_SetButtonAttrib(self,abutton,ModKey,"Enabled",aj)
         end
+        usedSmartCast=false
     end
 end
 

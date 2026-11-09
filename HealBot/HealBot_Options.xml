@@ -2968,7 +2968,7 @@
                                     </Anchor>
                                 </Anchors>
                                 <Scripts>
-                                    <OnLoad>HealBot_Options_val2_OnLoad(self,HEALBOT_OPTION_BARUPDFREQ,10,100,5,10)</OnLoad>
+                                    <OnLoad>HealBot_Options_val2_OnLoad(self,HEALBOT_OPTION_BARUPDFREQ,5,100,5,10)</OnLoad>
                                     <OnValueChanged>HealBot_Options_BarFreq_OnValueChanged(self)</OnValueChanged>
                                 </Scripts>
                             </Slider>

@@ -316,7 +316,7 @@ function HealBot_Action_SetClassIconTexture(button, unit)
     if not bar then return end
     iconName = _G[bar:GetName().."Icon15"];
     _,class = UnitClass(unit)
-    ciCol, ciRow = HealBot_ClassIconCoord[class or "DEFAULT"][1],HealBot_ClassIconCoord[class or "DEFAULT"][2];
+    ciCol, ciRow = unpack(HealBot_ClassIconCoord[class] or HealBot_ClassIconCoord.DEFAULT);
     left, top = (ciRow-1)*0.25,(ciCol-1)*0.25;
     iconName:SetTexture([[Interface\AddOns\HealBot\Images\icon_class.tga]]);
     iconName:SetTexCoord(left,left+0.25,top,top+0.25);

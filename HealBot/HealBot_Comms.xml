@@ -22,7 +22,7 @@
 		  <FontString name="HealBot_Error_Header" inherits="GameFontNormalLarge" text="HealBot">
 			<Anchors><Anchor point="TOP" relativePoint="TOP"><Offset><AbsDimension x="0" y="-15"/></Offset></Anchor></Anchors>
 		  </FontString>
-		  <FontString name="HealBot_Error_Header2" inherits="GameFontNormal" text="http://healbot.alturl.com">
+		  <FontString name="HealBot_Error_Header2" inherits="GameFontNormal" text="https://github.com/sirus-addons/HealBot">
 			<Anchors><Anchor point="TOP" relativePoint="TOP"><Offset><AbsDimension x="0" y="-40"/></Offset></Anchor></Anchors>
 		  </FontString>
             <FontString name="HBIncHealsHeader" inherits="ChatFontNormal" text="HEALBOT_INFO_INCHEALINFO">
@@ -155,25 +155,25 @@
             <FontString name="HBIncH38Cnt" inherits="GameFontNormalSmall"><Anchors><Anchor point="TOPRIGHT" relativeTo="HBIncH37Cnt" relativePoint="BOTTOMRIGHT"/></Anchors></FontString>
             
             <FontString name="HBAddonHeader" inherits="ChatFontNormal" text="HEALBOT_INFO_ADDONCPUUSAGE">
-                <Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT"><Offset><AbsDimension x="258" y="-75"/></Offset></Anchor></Anchors>
+                <Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT"><Offset><AbsDimension x="247" y="-75"/></Offset></Anchor></Anchors>
             </FontString>
             <FontString name="HBAddonHeader" inherits="ChatFontNormal" text="HEALBOT_INFO_ADDONCOMMUSAGE">
-                <Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT"><Offset><AbsDimension x="555" y="-75"/></Offset></Anchor></Anchors>
+                <Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT"><Offset><AbsDimension x="540" y="-75"/></Offset></Anchor></Anchors>
             </FontString>
             <FontString name="HBAddonColHeader1" inherits="ChatFontNormal" text="HEALBOT_WORD_ADDON">
                 <Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT"><Offset><AbsDimension x="250" y="-95"/></Offset></Anchor></Anchors>
             </FontString>
             <FontString name="HBAddonColHeader2" inherits="ChatFontNormal" text="HEALBOT_INFO_CPUSECS">
-                <Anchors><Anchor point="LEFT" relativeTo="HBAddonColHeader1" relativePoint="RIGHT"><Offset><AbsDimension x="60" y="0"/></Offset></Anchor></Anchors>
+                <Anchors><Anchor point="LEFT" relativeTo="HBAddonColHeader1" relativePoint="RIGHT"><Offset><AbsDimension x="15" y="0"/></Offset></Anchor></Anchors>
             </FontString>
             <FontString name="HBAddonColHeader3" inherits="ChatFontNormal" text="HEALBOT_INFO_MEMORYKB">
                 <Anchors><Anchor point="LEFT" relativeTo="HBAddonColHeader2" relativePoint="RIGHT"><Offset><AbsDimension x="14" y="0"/></Offset></Anchor></Anchors>
             </FontString>
             <FontString name="HBAddonColHeader4" inherits="ChatFontNormal" text="HEALBOT_WORD_ADDON">
-                <Anchors><Anchor point="LEFT" relativeTo="HBAddonColHeader3" relativePoint="RIGHT"><Offset><AbsDimension x="45" y="0"/></Offset></Anchor></Anchors>
+                <Anchors><Anchor point="LEFT" relativeTo="HBAddonColHeader3" relativePoint="RIGHT"><Offset><AbsDimension x="15" y="0"/></Offset></Anchor></Anchors>
             </FontString>
             <FontString name="HBAddonColHeader5" inherits="ChatFontNormal" text="HEALBOT_INFO_COMMS">
-                <Anchors><Anchor point="LEFT" relativeTo="HBAddonColHeader4" relativePoint="RIGHT"><Offset><AbsDimension x="105" y="0"/></Offset></Anchor></Anchors>
+                <Anchors><Anchor point="LEFT" relativeTo="HBAddonColHeader4" relativePoint="RIGHT"><Offset><AbsDimension x="200" y="0"/></Offset></Anchor></Anchors>
             </FontString>
 								
             <FontString name="HBMod1Name1" inherits="GameFontNormalSmall"><Anchors><Anchor point="TOPLEFT" relativeTo="HBAddonColHeader1" relativePoint="BOTTOMLEFT"/></Anchors></FontString>

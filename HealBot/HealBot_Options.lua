@@ -77,6 +77,7 @@ local HealBot_Buff_Spells_Total_List = {
         HEALBOT_GIFT_OF_THE_WILD,
         HEALBOT_THORNS,
         HEALBOT_OMEN_OF_CLARITY,
+        HEALBOT_THE_GIFT_OF_ISERA,
     },
     ["HUNT"] = {
         HEALBOT_A_MONKEY,
@@ -154,6 +155,7 @@ local HealBot_Buff_Spells_Total_List = {
         HEALBOT_PRAYER_OF_SHADOW_PROTECTION,
         HEALBOT_SHADOWFORM,
         HEALBOT_VAMPIRIC_EMBRACE,
+        HEALBOT_RENEWAL,
     },
     ["ROGU"] = {
     },
@@ -192,7 +194,7 @@ local HealBot_Buff_Spells_Class_List={}
 local HealBot_Buff_Spells_List ={}
 
 function HealBot_Options_InitBuffClassList()
-    HealBot_Buff_Spells_Class_List = HealBot_Buff_Spells_Total_List[strsub(HealBot_PlayerClassEN,1,4)]
+    HealBot_Buff_Spells_Class_List = HealBot_Buff_Spells_Total_List[strsub(HealBot_PlayerClassEN,1,4)] or {}
     table.sort (HealBot_Buff_Spells_Class_List)
 end
 
@@ -3479,6 +3481,21 @@ local HealBot_Options_Class_HoTctlName_List = {
     [HEALBOT_CHAINHEALHOT]=HEALBOT_SHAMAN,
     [HEALBOT_TIDAL_WAVES]=HEALBOT_SHAMAN,
     [HEALBOT_TIDAL_FORCE]=HEALBOT_SHAMAN,
+    [HEALBOT_THE_GIFT_OF_ISERA]=HEALBOT_DRUID,
+    [HEALBOT_FLOWERING_PERIOD]=HEALBOT_DRUID,
+    [HEALBOT_BLOSSOMING]=HEALBOT_DRUID,
+    [HEALBOT_COVER_OF_LIGHT]="ALL",
+    [HEALBOT_TOUCH_OF_THE_TITANS]=HEALBOT_NEW_ITEMS,
+    [HEALBOT_HAND_OF_THE_GUARDIANS]=HEALBOT_NEW_ITEMS,
+    [HEALBOT_ACCESSORY_HEALING]=HEALBOT_NEW_ITEMS,
+    [HEALBOT_RENEWAL]=HEALBOT_PRIEST,
+    [HEALBOT_RESIDUAL_SHINE]=HEALBOT_PALADIN,
+    [HEALBOT_AURA_MASTER]=HEALBOT_PALADIN,
+    [HEALBOT_DIVINE_GUARDIAN]=HEALBOT_PALADIN,
+    [HEALBOT_SACRED_SACRIFICE]=HEALBOT_PALADIN,
+    [HEALBOT_HEALING_RAIN]=HEALBOT_SHAMAN,
+    [HEALBOT_PRIMEVAL_MOISTURE]=HEALBOT_SHAMAN,
+    [HEALBOT_ICE_BLOCK]=HEALBOT_MAGE,
 }
 
 local HoTctlName_List={}
@@ -3487,7 +3504,7 @@ function HealBot_Options_Class_HoTctlName_genList()
         HoTctlName_List[x]=nil;
     end
     for bName,class in pairs(HealBot_Options_Class_HoTctlName_List) do
-        if class=="ALL" or HealBot_Options_StorePrev["FilterHoTctlName"]==class then
+        if (class=="ALL" and HealBot_Options_StorePrev["FilterHoTctlName"]~=HEALBOT_NEW_ITEMS) or HealBot_Options_StorePrev["FilterHoTctlName"]==class then
             table.insert(HoTctlName_List, bName)
         elseif bName==HEALBOT_NATURE_SWIFTNESS and HealBot_Options_StorePrev["FilterHoTctlName"]==HEALBOT_SHAMAN then  -- patch in the Shaman
             table.insert(HoTctlName_List, bName)
@@ -3567,7 +3584,7 @@ end
 function HealBot_Options_Class_HoTctlAction_Refresh(onselect)
     if not onselect then HealBot_Options_Class_HoTctlAction_Initialize() end  -- or wrong menu may be used !
     local hbClass=strsub(HealBot_PlayerClassEN,1,4)
-    UIDropDownMenu_SetSelectedID(HealBot_Options_Class_HoTctlAction,HealBot_Globals.WatchHoT[hbClass][HealBot_Globals.HoTname])
+    UIDropDownMenu_SetSelectedID(HealBot_Options_Class_HoTctlAction,(HealBot_Globals.WatchHoT[hbClass] or {})[HealBot_Globals.HoTname])
 end
 
 function HealBot_Options_Class_HoTctlAction_OnLoad(self)
@@ -3577,6 +3594,7 @@ end
 
 function HealBot_Options_Class_HoTctlAction_OnSelect(self)
     local hbClass=strsub(HealBot_PlayerClassEN,1,4)
+    HealBot_Globals.WatchHoT[hbClass]=HealBot_Globals.WatchHoT[hbClass] or {}
     HealBot_Globals.WatchHoT[hbClass][HealBot_Globals.HoTname]=self:GetID()
     HealBot_Options_Class_HoTctlAction_Refresh(true)
     HealBot_setOptions_Timer(170)
@@ -3595,6 +3613,7 @@ local HealBot_Options_FilterHoTctl_List = {
     HEALBOT_MAGE,
     HEALBOT_ROGUE,
     HEALBOT_WARLOCK,
+    HEALBOT_NEW_ITEMS,
 }
 
 HealBot_Options_StorePrev["FilterHoTctlID"]=1
@@ -5493,11 +5512,11 @@ local HealBot_Debuff_RangeWarning_List = {
     HEALBOT_SPELL_RANGE,
 }
 function HealBot_Options_GetDebuffSpells_List(class)
-    return HealBot_Debuff_Spells[class]
+    return HealBot_Debuff_Spells[class] or {}
 end
 
 function HealBot_Options_GetRacialDebuffSpells_List(race)
-    return HealBot_Racial_Debuff_Spells[race]
+    return HealBot_Racial_Debuff_Spells[race] or {}
 end
 
 local DebuffSpells_List=nil
@@ -8122,83 +8141,80 @@ function HealBot_Options_OnDragStop(self)
     HealBot_StopMoving(self);
 end
 
+local hbHiddenParent=CreateFrame("Frame",nil,UIParent)
+hbHiddenParent:Hide()
+local hbHiddenFrames={}
+local hbWantHidden={}
+
+local function HealBot_Options_ApplyHiddenFrame(frame)
+    if hbWantHidden[frame] then
+        if not hbHiddenFrames[frame] then
+            hbHiddenFrames[frame]=frame:GetParent()
+            frame:SetParent(hbHiddenParent)
+        end
+    elseif hbHiddenFrames[frame] then
+        frame:SetParent(hbHiddenFrames[frame])
+        hbHiddenFrames[frame]=nil
+    end
+end
+
+local function HealBot_Options_SetFrameHidden(frame,hidden)
+    if frame then
+        hbWantHidden[frame]=hidden
+        if not InCombatLockdown() then
+            HealBot_Options_ApplyHiddenFrame(frame)
+        end
+    end
+end
+
+local hbHiddenFramesListener=CreateFrame("Frame")
+hbHiddenFramesListener:RegisterEvent("PLAYER_REGEN_ENABLED")
+hbHiddenFramesListener:SetScript("OnEvent", function()
+    for frame,_ in pairs(hbWantHidden) do
+        HealBot_Options_ApplyHiddenFrame(frame)
+    end
+end)
+
 function HealBot_Options_DisablePlayerFrame()
-    PlayerFrame:UnregisterAllEvents()
-    PlayerFrameHealthBar:UnregisterAllEvents()
-    PlayerFrameManaBar:UnregisterAllEvents()
-    PlayerFrame:Hide()
+    HealBot_Options_SetFrameHidden(PlayerFrame,true)
 end
 
 function HealBot_Options_EnablePlayerFrame()
-    PlayerFrame:RegisterAllEvents()
-    PlayerFrameHealthBar:RegisterAllEvents()
-    PlayerFrameManaBar:RegisterAllEvents()
-    PlayerFrame:Show();
+    HealBot_Options_SetFrameHidden(PlayerFrame,false)
 end
 
 function HealBot_Options_DisablePetFrame()
-    PetFrame:UnregisterAllEvents()
-    PetFrame:Hide()
+    HealBot_Options_SetFrameHidden(PetFrame,true)
 end
 
 function HealBot_Options_EnablePetFrame()
-    PetFrame:RegisterAllEvents()
-    PetFrame:Show();
+    HealBot_Options_SetFrameHidden(PetFrame,false)
 end
 
-local f=nil
-function HealBot_Options_DisablePartyFrame()
-    hooksecurefunc("ShowPartyFrame", function()
-        for x = 1,4 do
-            g=_G["PartyMemberFrame"..x]
-            g:Hide()
+local function HealBot_Options_SetPartyFrameHidden(hidden)
+    if PartyFrame then
+        HealBot_Options_SetFrameHidden(PartyFrame,hidden)
+    else
+        for x = 1, 4 do
+            HealBot_Options_SetFrameHidden(_G["PartyMemberFrame"..x],hidden)
         end
-    end)
-    for x = 1, 4 do
-        f = _G["PartyMemberFrame"..x]
-        f:Hide()
-        f:UnregisterAllEvents()
-        g=_G["PartyMemberFrame"..x.."HealthBar"]
-        g:UnregisterAllEvents()
-        g=_G["PartyMemberFrame"..x.."ManaBar"]
-        g:UnregisterAllEvents()
     end
+end
+
+function HealBot_Options_DisablePartyFrame()
+    HealBot_Options_SetPartyFrameHidden(true)
 end
 
 function HealBot_Options_EnablePartyFrame()
-    hooksecurefunc("ShowPartyFrame", function()
-        for x = 1,4 do
-            g=_G["PartyMemberFrame"..x]
-            g:Show()
-        end
-    end)
-    for x = 1, 4 do
-        f = _G["PartyMemberFrame"..x]
-        if GetPartyMember(x) then
-            f:Show()
-        end
-        f:RegisterAllEvents()
-        g=_G["PartyMemberFrame"..x.."HealthBar"]
-        g:RegisterAllEvents()
-        g=_G["PartyMemberFrame"..x.."ManaBar"]
-        g:RegisterAllEvents()
-    end
+    HealBot_Options_SetPartyFrameHidden(false)
 end
 
 function HealBot_Options_DisableTargetFrame()
-    TargetFrame:UnregisterAllEvents()
-    TargetFrameHealthBar:UnregisterAllEvents()
-    TargetFrameManaBar:UnregisterAllEvents()
-    TargetFrame:Hide()
-    TargetFrameToT:UnregisterAllEvents()
-    TargetFrameToT:Hide()
+    HealBot_Options_SetFrameHidden(TargetFrame,true)
 end
 
 function HealBot_Options_EnableTargetFrame()
-    TargetFrame:RegisterAllEvents()
-    TargetFrameHealthBar:RegisterAllEvents()
-    TargetFrameManaBar:RegisterAllEvents()
-    TargetFrameToT:RegisterAllEvents()
+    HealBot_Options_SetFrameHidden(TargetFrame,false)
 end
 
 function HealBot_Options_SetSliderValue(slider,value,updating)
