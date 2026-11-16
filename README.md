@@ -9,3 +9,15 @@
 Настройка:\
 /healbot - окно модификации;\
 /healbot options - окно настройки модификации.
+
+**Скриншоты:**
+
+![](https://raw.githubusercontent.com/sirus-addons/HealBot/master/.screenshots/1.webp)
+![](https://raw.githubusercontent.com/sirus-addons/HealBot/master/.screenshots/2.webp)
+![](https://raw.githubusercontent.com/sirus-addons/HealBot/master/.screenshots/3.webp)
+![](https://raw.githubusercontent.com/sirus-addons/HealBot/master/.screenshots/4.webp)
+![](https://raw.githubusercontent.com/sirus-addons/HealBot/master/.screenshots/5.webp)
+![](https://raw.githubusercontent.com/sirus-addons/HealBot/master/.screenshots/6.webp)
+![](https://raw.githubusercontent.com/sirus-addons/HealBot/master/.screenshots/7.webp)
+![](https://raw.githubusercontent.com/sirus-addons/HealBot/master/.screenshots/8.webp)
+![](https://raw.githubusercontent.com/sirus-addons/HealBot/master/.screenshots/9.webp)
