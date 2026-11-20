@@ -1644,7 +1644,7 @@ function HealBot_OnEvent(self, event, ...)
     elseif (event=="CHARACTER_POINTS_CHANGED") then
         HealBot_OnEvent_TalentsChanged(self);
     elseif (event=="PLAYER_TALENT_UPDATE_EX") then
-        HealBot_OnEvent_TalentsChanged(self);
+        HealBot_OnEvent_TalentsUpdateEx(self);
     elseif (event=="TalentQuery_Ready") or (event=="TalentQuery_Ready_Outsider") then
         HealBot_GetUnitTalentInfo(arg1, arg2, arg3)
     elseif (event=="ZONE_CHANGED_NEW_AREA") then
@@ -3522,11 +3522,30 @@ function HealBot_HasMyBuffs(hbGUID)
     end
 end
 
+local hbMyBuffEnd={}
 function HealBot_CheckMyBuffs(hbGUID)
     xUnit=HealBot_UnitID[hbGUID]
     if not xUnit then return end
+    for x,_ in pairs(hbMyBuffEnd) do
+        hbMyBuffEnd[x]=nil
+    end
+    if UnitExists(xUnit) then
+        k = 1
+        while true do
+            x,_,iTexture,_,_,_,expirationTime, caster,_,_,spellID = UnitAura(xUnit, k, "HELPFUL")
+            if x then
+                if HealBot_CheckBuffs[x] and caster=="player" and not hbExcludeSpells[spellID] and hbMyBuffEnd[x]==nil then
+                    hbMyBuffEnd[x]=expirationTime
+                    if not HealBot_HoT_Texture[x] then HealBot_HoT_Texture[x]=iTexture end
+                end
+                k=k+1
+            else
+                do break end
+            end
+        end
+    end
     for bName,_ in pairs(HealBot_CheckBuffs) do
-        _,z = HealBot_HasUnitBuff(bName,xUnit,"player")
+        z=hbMyBuffEnd[bName]
         if z and z-GetTime()>0 then
             HealBot_SetUnitBuffTimer(hbGUID,bName,z)
         elseif HealBot_PlayerBuff[hbGUID] and HealBot_PlayerBuff[hbGUID][bName] then
@@ -4784,6 +4803,17 @@ end
 function HealBot_OnEvent_TalentsChanged(self)
     HealBot_UnitSpec[HealBot_PlayerGUID] = " "
     HealBot_CheckTalents=true
+end
+
+local hbTalentSign=nil
+function HealBot_OnEvent_TalentsUpdateEx(self)
+    local g=C_Talent.GetActiveTalentGroup() or 1
+    local t1,t2,t3=C_Talent.GetTalentGroupPointSpent(g)
+    local s=g..":"..t1..":"..t2..":"..t3
+    if s~=hbTalentSign then
+        hbTalentSign=s
+        HealBot_OnEvent_TalentsChanged(self)
+    end
 end
 
 function HealBot_OnEvent_PlayerEnteringWorld(self)
