@@ -3090,7 +3090,7 @@ function HealBot_Action_SmartCast(hbGUID)
     elseif HealBot_UnitDebuff[hbGUID] and HealBot_Config.SmartCastDebuff==1 then
         sName=HealBot_DebuffSpell[HealBot_UnitDebuff[hbGUID]["type"]];
         rangeSpell=HealBot_dSpell
-    elseif HealBot_UnitBuff[hbGUID] and HealBot_Config.SmartCastBuff==1 then
+    elseif HealBot_UnitBuff[hbGUID] and HealBot_Config.SmartCastBuff==1 and UnitHealth(HealBot_UnitID[hbGUID])>=UnitHealthMax(HealBot_UnitID[hbGUID]) then
         sName=HealBot_UnitBuff[hbGUID];
         rangeSpell=HealBot_bSpell
     elseif HealBot_Config.SmartCastHeal==1 then
